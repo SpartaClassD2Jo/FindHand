@@ -2,7 +2,19 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+<<<<<<< HEAD
       <module fileurl="file://$PROJECT_DIR$/.idea/weekone.iml" filepath="$PROJECT_DIR$/.idea/weekone.iml" />
+=======
+sungmin
+ HEAD
+      <module fileurl="file://$PROJECT_DIR$/.idea/ProjectGit.iml" filepath="$PROJECT_DIR$/.idea/ProjectGit.iml" />
+
+      <module fileurl="file://$PROJECT_DIR$/.idea/weekone.iml" filepath="$PROJECT_DIR$/.idea/weekone.iml" />
+438fd4e3442381de5d1f00bf26f22b5e1f50fe19
+
+      <module fileurl="file://$PROJECT_DIR$/.idea/week1.iml" filepath="$PROJECT_DIR$/.idea/week1.iml" />
+main
+>>>>>>> 0abb8f4db04047b95eda5b51054c98e0d71aac9f
     </modules>
   </component>
 </project>
