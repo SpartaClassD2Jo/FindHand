@@ -1,0 +1,157 @@
+Skip to content
+Search or jump to…
+Pull requests
+Issues
+Marketplace
+Explore
+
+@Adam-SungMin-Park
+SpartaClassD2Jo
+/
+FindHand
+Public
+Code
+Issues
+Pull requests
+3
+Actions
+Projects
+Wiki
+Security
+Insights
+Settings
+FindHand/templates/login.html
+@kimjiae970
+kimjiae970 로그인 (데이터베이스 연동 작동)까지 구현
+Latest commit bafee5d 34 minutes ago
+ History
+ 2 contributors
+@Adam-SungMin-Park@kimjiae970
+127 lines (108 sloc)  3.99 KB
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- Bulma CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.1/css/bulma.min.css">
+    <!-- Font Awesome CSS -->
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+
+    <!-- JS -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.js"></script>
+    <title>Title</title>
+
+    <style>
+        #root {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        .container {
+            width: 100vw;
+            height: 100vh;
+            margin-top: 200px;
+
+        }
+
+        .box {
+            height: 280px;
+            padding: 1rem 1.5rem;
+            max-width: 750px;
+            margin: auto;
+
+        }
+        .input {
+            margin:5px 0 10px 0;
+        }
+        .is-mobile {
+            margin:5px 0 10px 0;
+        }
+    </style>
+
+    <script>
+
+
+        function sign_in(){
+            let username = $("#input-username").val()
+            let password = $("#input-password").val()
+
+            if (username == "") {
+                $("#help-id-login").text("아이디를 입력해주세요.")
+                $("#input-username").focus()
+                return;
+            } else {
+                $("#help-id-login").text("")
+            }
+
+            if (password == "") {
+                $("#help-password-login").text("비밀번호를 입력해주세요.")
+                $("#input-password").focus()
+                return;
+            } else {
+                $("#help-password-login").text("")
+            }
+            $.ajax({
+                type: "POST",
+                url: "/sign_in",
+                data: {
+                    username_give: username,
+                    password_give: password
+                },
+                success: function (response) {
+                    if (response['result'] == 'success') {
+                        $.cookie('mytoken', response['token'], {path: '/'});
+                        window.location.replace("/")
+                    } else {
+                        alert(response['msg'])
+                    }
+                }
+            });
+        }
+    </script>
+</head>
+<body>
+    <div id="root">
+        <div class="container">
+            <div class="box" style="max-width: 400px; margin: auto; background-color: green">
+
+                <div class="control has-icons-left" style="width:100%">
+                    <input id="input-username" class="input" type="text" placeholder="아이디">
+                    <span class="icon is-small is-left"><i class="fa fa-user"></i></span>
+                     <p id="help-id-login" class="help is-danger"></p>
+                </div>
+
+                <div class="control has-icons-left">
+                    <input id="input-password" class="input" type="password" placeholder="비밀번호">
+                    <span class="icon is-small is-left"><i class="fa fa-lock"></i></span>
+                      <p id="help-password-login" class="help is-danger"></p>
+                </div>
+
+                <div class="form-group">
+                    <div class="custom-control custom-checkbox small">
+                        <label>
+                            <input type="checkbox" name="useCookie"> 로그인유지
+                        </label>
+                    </div>
+                </div>
+
+                <nav class="level is-mobile">
+                    <button class="level-item button is-sparta" onclick="sign_in()">
+                        로그인
+                    </button>
+                    <button class="level-item button is-sparta" onclick="sign_up()">
+                        회원가입
+                    </button>
+                </nav>
+
+            </div>
+
+        </div>
+    </div>
+</body>
+</html>
+
+

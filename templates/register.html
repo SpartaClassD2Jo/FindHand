@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css"
+          integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A=="
+          crossorigin="anonymous" referrerpolicy="no-referrer"/>
+    <title>Title</title>
+    <style>
+        .wrapper {
+            width: 700px;
+            margin: auto;
+            margin-top: 1rem;
+        }
+
+        h1 {
+            text-align: center;
+            margin-top: 1rem;
+        }
+
+        i {
+            color: black;
+        }
+
+        .buttons {
+            margin: 0 auto;
+            width: 700px;
+        }
+
+        .cancelButton {
+            margin-left: 1rem;
+        }
+    </style>
+    <script>
+        function newUser() {
+            let email = $('#email').val()
+            let password = $('#password').val()
+            let passwordCheck = $('#passwordCheck').val()
+            console.log($("#dup").hasClass('checked'))
+
+            if (password === passwordCheck && $("#dup").hasClass('checked') && password !== "" && email.trim().length >= 2) {
+                $.ajax({
+                    type: "POST",
+                    url: "/register/newUser",
+                    data: {
+                        email_give: email,
+                        password_give: password
+                    },
+                    success: function (response) {
+                        if (response['result'] == 'success') {
+                            alert('회원가입이 완료되었습니다.')
+                            window.location.href = '/login'
+                        } else {
+                            alert(response['msg'])
+                            window.location.href = '/'
+                        }
+                    }
+                })
+            } else if (password !== passwordCheck && $("#dup").hasClass('checked')) {
+                alert('비밀 번호를 확인해주세요')
+                passwordCheck.focus()
+            } else if (password === passwordCheck && !$("#dup").hasClass('checked')) {
+                alert('이메일 중복확인을 해주세요')
+                $('#email').focus()
+            } else if (!password) {
+                alert('비밀번호 설정해주세요')
+            }
+        }
+
+        function check_dup() {
+            let email = $('#email').val()
+            if (email.trim().length < 2) {
+                alert('아이디가 너무 짧')
+            } else {
+                $.ajax({
+                    type: 'POST',
+                    url: '/register/duplicate',
+                    data: {
+                        email_give: email
+                    },
+                    success: function (res) {
+                        if (res.msg == '이미 사용중인 아이디입니다') {
+                            alert(res.msg)
+                        } else {
+                            alert(res.msg)
+                            $('#dup').addClass('checked')
+                        }
+                    }
+                })
+            }
+
+        }
+    </script>
+</head>
+<body>
+<h1>회원 가입</h1>
+<div class="registerForm wrapper">
+
+    <article class="media">
+        <div class="media-content">
+            <div class="content">
+                <div class="field has-addons ">
+                    <div class="control has-icons-left" style="width:100%">
+                        <input id="email" class="input" type="text" placeholder="아이디">
+                        <span class="icon is-small is-left"><i class="fa fa-user"></i></span>
+                    </div>
+                    <div id="btn-check-dup" class="control">
+                        <button class="button is-sparta" id="dup" onclick="check_dup()">중복확인</button>
+                    </div>
+
+                </div>
+                <p id="help-id" class="help">아이디는 2-10자의 영문과 숫자와 일부 특수문자(._-)만 입력 가능합니다.</p>
+                <p id="help-id-login" class="help is-danger is-hidden"></p>
+
+                <div class="field">
+                    <p class="control has-icons-left">
+                        <input class="input" id="password" type="password" placeholder="Password">
+                        <span class="icon is-small is-left">
+            <i class="fas fa-lock"></i>
+          </span>
+                    </p>
+                </div>
+                <div class="field">
+                    <p class="control has-icons-left">
+                        <input class="input" id="passwordCheck" type="password" placeholder="Password Check">
+                        <span class="icon is-small is-left">
+                            <i class="fas fa-lock"></i>
+                        </span>
+                    </p>
+                </div>
+                <div class="buttons">
+                    <div class="registerButton">
+                        <button class="button is-primary" onclick="newUser()">회원 가입</button>
+                    </div>
+                    <div class="cancelButton registerForm ">
+                        <a href="/login">
+                            <button class="button is-primary">취소</button>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </article>
+</div>
+
+
+</body>
+</html>
