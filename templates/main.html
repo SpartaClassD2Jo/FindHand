@@ -24,8 +24,27 @@
             crossorigin="anonymous"></script>
 
     <style>
-        h1 {
+
+        .banner {
+            display: flex;
+            height: 300px;
+            background-image: linear-gradient(0deg, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('https://cdn.pixabay.com/photo/2018/09/15/08/14/cat-3678858__340.jpg');
+            background-position: center 40%;
+            background-size: cover;
+            flex-direction: column;
+
+        }
+
+        .title {
             text-align: center;
+            margin: auto;
+
+        }
+        .btns{
+            margin-top: 10px;
+        }
+        .btns > a{
+            margin-left: 5px;
         }
 
         img {
@@ -58,13 +77,13 @@
     </script>
 
 <body>
-<div>
-    <div>
-        <a href="/login"><span>Login</span></a>
-        <a href="/register"><span>Register</span></a>
+
+<div class="banner">
+    <div class="btns">
+        <a class="btn btn-primary" href="/login" role="button">Login</a>
+        <a class="btn btn-primary" href="/register" role="button">Register</a>
     </div>
-    <img src="">
-    <h1><a href="/">Find Hand</a></h1>
+    <a href="/"><span class="title"><h1>Find Hand</h1></span></a>
 </div>
 <div class="divider-txt">보호소</div>
 <div class="shelter">
