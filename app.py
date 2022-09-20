@@ -17,7 +17,7 @@ app = Flask(__name__)
 
 SECRET_KEY = 'SPARTA'
 
-from pymongo import MongoClient
+
 import certifi
 
 
