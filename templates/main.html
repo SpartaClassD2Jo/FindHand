@@ -32,10 +32,18 @@
             width: 200px;
             height: 200px;
         }
-        .shelter{
+
+        .shelter, .temp {
             width: auto;
-            height: 500px;
+            height: 50%;
             padding: 10px;
+            overflow: scroll;
+            overflow-x: hidden
+
+        }
+
+        .divider-txt {
+            text-align: center;
         }
 
         .container {
@@ -51,25 +59,49 @@
 
 <body>
 <div>
+    <div>
+        <a href="/login"><span>Login</span></a>
+        <a href="/register"><span>Register</span></a>
+    </div>
     <img src="">
-    <h1>Find Hand</h1>
+    <h1><a href="/">Find Hand</a></h1>
 </div>
+<div class="divider-txt">보호소</div>
 <div class="shelter">
-    <div class="wrap">
-        <div class="container">
-            <div class="row row-cols-auto">
-                {% for animal in animals %}
-                    <div class="col">
-                        <div class="card" style="width: 15rem;">
-                            <img src={{ animal.img }} class="card-img-top">
-                            <div class="card-body">
-                                <p class="card-text">{{ animal.notice_num }}</p>
-                            </div>
+    <div class="container">
+        <div class="row row-cols-auto">
+            {% for animal in animals %}
+            <a href="">
+                <div class="col">
+                    <div class="card" style="width: 15rem;">
+                        <img src={{ animal.img }} class="card-img-top">
+                        <div class="card-body">
+                            <p class="card-text">{{ animal.notice_num }}</p>
                         </div>
                     </div>
-                {% endfor %}
-
-            </div>
+                </div>
+            </a>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+<br>
+<div class="divider-txt">임시보호</div>
+<div class="temp">
+    <div class="container">
+        <div class="row row-cols-auto">
+            {% for animal in animals %}
+            <a href="">
+                <div class="col">
+                    <div class="card" style="width: 15rem;">
+                        <img src={{ animal.img }} class="card-img-top">
+                        <div class="card-body">
+                            <p class="card-text">{{ animal.notice_num }}</p>
+                        </div>
+                    </div>
+                </div>
+            </a>
+            {% endfor %}
         </div>
     </div>
 </div>

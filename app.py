@@ -1,8 +1,5 @@
 from pymongo import MongoClient
 from bs4 import BeautifulSoup
-
-from db import client
-
 from flask import Flask, render_template, request, jsonify,session, make_response
 from jinja2 import Template
 import requests
@@ -15,20 +12,8 @@ import datetime
 
 
 
-
-
-
 # 나중에 git-encrypt 사용하여 이부분은 따로 보안 할 예정
-
-client = MongoClient('mongodb+srv://test:sparta@cluster0.onepf4f.mongodb.net/?retryWrites=true&w=majority', 27017)
-# database 이름은 "weekone"
-
-app = Flask(__name__)
-db = client.dbsparta
-
-
 # 로그인 페이지 보여주는 API
-
 #client = MongoClient('mongodb+srv://데이타 베이스 넣기')
 client = MongoClient('mongodb+srv://test:sparta@cluster0.onepf4f.mongodb.net/?retryWrites=true&w=majority', 27017)
 
