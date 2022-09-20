@@ -1,57 +1,57 @@
 from pymongo import MongoClient
 from bs4 import BeautifulSoup
+<<<<<<< HEAD
 
 
 
 # from db import client << 이 라인 필요한가요??
 
+=======
+from db import client
+>>>>>>> 12a62c19c0641d426e37a30ae63f43ef44604ca2
 from flask import Flask, render_template, request, jsonify,session, make_response
 from jinja2 import Template
 import requests
 import jwt
-from requests import get
-import requests
-import hashlib
 import datetime
+import hashlib
+from flask import Flask, render_template, jsonify, request, redirect, url_for
+from werkzeug.utils import secure_filename
+from datetime import datetime, timedelta
 
-
-
-
-
-
-
-# 나중에 git-encrypt 사용하여 이부분은 따로 보안 할 예정
-
-client = MongoClient('mongodb+srv://test:sparta@cluster0.onepf4f.mongodb.net/?retryWrites=true&w=majority', 27017)
-# database 이름은 "weekone"
 
 app = Flask(__name__)
-db = client.dbsparta
+
+SECRET_KEY = 'SPARTA'
+
+from pymongo import MongoClient
+import certifi
 
 
-# 로그인 페이지 보여주는 API
-
-#client = MongoClient('mongodb+srv://데이타 베이스 넣기')
-client = MongoClient('mongodb+srv://test:sparta@cluster0.onepf4f.mongodb.net/?retryWrites=true&w=majority', 27017)
-
-app = Flask(__name__)
-db = client.dbsparta
+ca = certifi.where()
+db = client.dbsparta_plus_week4
 
 @app.route('/')
-def main():
-    animals = list(db.animals.find({}, {"_id": False}))
-    return render_template("main.html", animals=animals)
+def home():
+    token_receive = request.cookies.get('mytoken')
+    try:
+        payload = jwt.decode(token_receive, SECRET_KEY, algorithms=['HS256'])
 
+        return render_template('index.html')
+    except jwt.ExpiredSignatureError:
+        return redirect(url_for("login", msg="로그인 시간이 만료되었습니다."))
+    except jwt.exceptions.DecodeError:
+        return redirect(url_for("login", msg="로그인 정보가 존재하지 않습니다."))
 
 @app.route('/login')
 def login():
-    return render_template('login.html')
+    msg = request.args.get("msg")
+    return render_template('login.html', msg=msg)
 
 # 회원 가입 페이지 보여주는 API
 @app.route('/register')
 def register_page():
     return render_template('register.html')
-
 
 # 이메일 중복확인 API
 
@@ -81,19 +81,26 @@ def register_newuser():
     return jsonify({'msg':'회원 가입 완료!'})
 
 
-# 로그인 눌렀을때 API
-@app.route('/login/submit', methods = ['POST'])
-def logging_in():
-    email_receive = request.form['email_give']
+@app.route('/sign_in', methods=['POST'])
+def sign_in():
+    # 로그인
+    username_receive = request.form['username_give']
     password_receive = request.form['password_give']
-    find_user = db.weekone.find({'email':email_receive, 'password':password_receive}, {'_id':False})
-    return jsonify({'msg':find_user})
 
+    pw_hash = hashlib.sha256(password_receive.encode('utf-8')).hexdigest()
+    result = db.users.find_one({'username': username_receive, 'password': pw_hash})
 
+    if result is not None:
+        payload = {
+         'id': username_receive,
+         'exp': datetime.utcnow() + timedelta(seconds=60 * 5 )  # 로그인 5분 유지
+        }
+        token = jwt.encode(payload, SECRET_KEY, algorithm='HS256')
+
+        return jsonify({'result': 'success', 'token': token})
+    # 찾지 못하면
+    else:
+        return jsonify({'result': 'fail', 'msg': '아이디/비밀번호가 일치하지 않습니다.'})
 
 if __name__ == '__main__':
-    app.run('0.0.0.0', port=5000, debug=True)
-
-
-
-
+    app.run('0.0.0.0', port=5010, debug=True)

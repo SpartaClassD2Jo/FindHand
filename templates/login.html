@@ -1,85 +1,127 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- Bulma CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.1/css/bulma.min.css">
+    <!-- Font Awesome CSS -->
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+
+    <!-- JS -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.js"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css"
-          integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A=="
-          crossorigin="anonymous" referrerpolicy="no-referrer"/>
-    <meta charset="UTF-8">
-    <script>
-        function login(){
-            let userId = $('#userId').val();
-            let password = $('#password').val();
-            console.log(userId)
-            if(userId && password){
-                $.ajax({
-                    type:'POST',
-                    url:'/login/submit',
-                    data:{
-                        userId_give: userId,
-                        password_give: password
-                    },
-                    success:function (res){
-                      alert(res.msg)
-                    }
-                })
-            }
-            else{
-                alert('아이디/비밀번호 확인해주셔요')
-            }
-        }
-    </script>
-
-
+    <title>Title</title>
 
     <style>
-        .wrapper {
-            width: 700px;
-            margin: auto;
-            text-align: center;
+        #root {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        .container {
+            width: 100vw;
+            height: 100vh;
+            margin-top: 200px;
+
         }
 
+        .box {
+            height: 280px;
+            padding: 1rem 1.5rem;
+            max-width: 750px;
+            margin: auto;
+
+        }
+        .input {
+            margin:5px 0 10px 0;
+        }
+        .is-mobile {
+            margin:5px 0 10px 0;
+        }
     </style>
 
-    <title></title>
+    <script>
+
+
+        function sign_in(){
+            let username = $("#input-username").val()
+            let password = $("#input-password").val()
+
+            if (username == "") {
+                $("#help-id-login").text("아이디를 입력해주세요.")
+                $("#input-username").focus()
+                return;
+            } else {
+                $("#help-id-login").text("")
+            }
+
+            if (password == "") {
+                $("#help-password-login").text("비밀번호를 입력해주세요.")
+                $("#input-password").focus()
+                return;
+            } else {
+                $("#help-password-login").text("")
+            }
+            $.ajax({
+                type: "POST",
+                url: "/sign_in",
+                data: {
+                    username_give: username,
+                    password_give: password
+                },
+                success: function (response) {
+                    if (response['result'] == 'success') {
+                        $.cookie('mytoken', response['token'], {path: '/'});
+                        window.location.replace("/")
+                    } else {
+                        alert(response['msg'])
+                    }
+                }
+            });
+        }
+    </script>
 </head>
 <body>
-<div class="wrapper">
-    <div class="loginComponent">
-        <h1>login page</h1>
-        <div class="field">
-            <p class="control has-icons-left has-icons-right">
-                <input id = "userId" class="input" type="email" placeholder="아이디">
-                <span class="icon is-small is-left">
-                    <i class="fas fa-envelope"></i>
-                </span>
+    <div id="root">
+        <div class="container">
+            <div class="box" style="max-width: 400px; margin: auto; background-color: green">
 
-            </p>
-        </div>
-        <div class="field">
-            <p class="control has-icons-left">
-                <input id ="password" class="input" type="password" placeholder="비밀번호">
-                <span class="icon is-small is-left">
-                    <i class="fas fa-lock"></i>
-                </span>
-            </p>
-        </div>
-        <div class="buttons">
-            <div class="registerButton">
-                <button onclick = "login()" class="button is-primary" onclick="newUser()">로그인</button>
+                <div class="control has-icons-left" style="width:100%">
+                    <input id="input-username" class="input" type="text" placeholder="아이디">
+                    <span class="icon is-small is-left"><i class="fa fa-user"></i></span>
+                     <p id="help-id-login" class="help is-danger"></p>
+                </div>
+
+                <div class="control has-icons-left">
+                    <input id="input-password" class="input" type="password" placeholder="비밀번호">
+                    <span class="icon is-small is-left"><i class="fa fa-lock"></i></span>
+                      <p id="help-password-login" class="help is-danger"></p>
+                </div>
+
+                <div class="form-group">
+                    <div class="custom-control custom-checkbox small">
+                        <label>
+                            <input type="checkbox" name="useCookie"> 로그인유지
+                        </label>
+                    </div>
+                </div>
+
+                <nav class="level is-mobile">
+                    <button class="level-item button is-sparta" onclick="sign_in()">
+                        로그인
+                    </button>
+                    <button class="level-item button is-sparta" onclick="sign_up()">
+                        회원가입
+                    </button>
+                </nav>
+
             </div>
-            <div class="cancelButton registerForm ">
-                <a href="/register">
-                    <button onclick = "login()" class="button is-primary">회원 가입</button>
-                </a>
-            </div>
+
         </div>
     </div>
-
-
-</div>
-
 </body>
 </html>
+
+
+
