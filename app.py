@@ -1,9 +1,31 @@
+
+from pymongo import MongoClient
+from bs4 import BeautifulSoup
+from db import client
+
+from flask import Flask, render_template, request, jsonify,session, make_response
+from jinja2 import Template
+import requests
+
 import jwt
 import datetime
+
+
+
+
+
+
+
+
+# 나중에 git-encrypt 사용하여 이부분은 따로 보안 할 예정
+
+# database 이름은 "weekone"
+
 import hashlib
 from flask import Flask, render_template, jsonify, request, redirect, url_for
 from werkzeug.utils import secure_filename
 from datetime import datetime, timedelta
+ main
 
 app = Flask(__name__)
 
@@ -12,7 +34,9 @@ SECRET_KEY = 'SPARTA'
 from pymongo import MongoClient
 import certifi
 
+
 ca = certifi.where()
+
 
 client = MongoClient('mongodb+srv://jiae:kja9798!@cluster0.hvkrheo.mongodb.net/?retryWrites=true&w=majority', tlsCAFile=ca)
 db = client.dbsparta_plus_week4
