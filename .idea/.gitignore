@@ -1,13 +1,25 @@
+garam
+HEAD
+
 sungmin
+main
 # Default ignored files
 /shelf/
 /workspace.xml
 # Editor-based HTTP Client requests
+garam
 
+
+
+main
 # 디폴트 무시된 파일
 /shelf/
 /workspace.xml
 # 에디터 기반 HTTP 클라이언트 요청
+garam
+844a343 (커밋 메세지)
+
+main
 main
 /httpRequests/
 # Datasource local storage ignored files
