@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.js"></script>
+
+    <title>Title</title>
+    <style>
+        .wrapper {
+            width: 700px;
+            margin: auto;
+            text-align: center;
+        }
+
+    </style>
+</head>
+<body>
+<div class="registerForm wrapper">
+  <h1>회원 가입</h1>
+  <div class = field>
+    <p class="control has-icons-left has-icons-right">
+      <input class="input" type="email" placeholder="Email">
+      <span class="icon is-small is-left">
+        <i class="fas fa-envelope"></i>
+      </span>
+      <span class="icon is-small is-right">
+        <i class="fas fa-check"></i>
+      </span>
+    </p>
+  </div>
+
+  <div class="field">
+      <p class="control has-icons-left">
+          <input class="input" type="password" placeholder="Password">
+          <span class="icon is-small is-left">
+            <i class="fas fa-lock"></i>
+          </span>
+      </p>
+  </div>
+  <div class="field">
+      <p class="control has-icons-left">
+          <input class="input" type="password" placeholder="Password Check">
+          <span class="icon is-small is-left">
+            <i class="fas fa-lock"></i>
+          </span>
+      </p>
+  </div>
+  <div class="buttons">
+      <div class="registerButton">
+          <button class="button is-primary" onclick="openRegister()">회원 가입</button>
+      </div>
+      <div class="cancelButton registerForm ">
+          <button class="button is-primary" >취소</button>
+      </div>
+  </div>
+</div>
+
+
+
+</body>
+</html>
