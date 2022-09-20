@@ -1,6 +1,6 @@
 from pymongo import MongoClient
 from bs4 import BeautifulSoup
-from db import clie
+from db import client
 from flask import Flask, render_template, request, jsonify,session, make_response
 from jinja2 import Template
 import requests
