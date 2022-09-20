@@ -1,14 +1,18 @@
 from pymongo import MongoClient
 from bs4 import BeautifulSoup
-<<<<<<< HEAD
+
+from db import client
+
+
+
 
 
 
 # from db import client << 이 라인 필요한가요??
 
-=======
 from db import client
->>>>>>> 12a62c19c0641d426e37a30ae63f43ef44604ca2
+
+
 from flask import Flask, render_template, request, jsonify,session, make_response
 from jinja2 import Template
 import requests
