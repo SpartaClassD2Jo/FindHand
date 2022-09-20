@@ -4,8 +4,36 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.js"></script>
-
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css"
+          integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A=="
+          crossorigin="anonymous" referrerpolicy="no-referrer"/>
     <meta charset="UTF-8">
+    <script>
+        function login(){
+            let userId = $('#userId').val();
+            let password = $('#password').val();
+            console.log(userId)
+            if(userId && password){
+                $.ajax({
+                    type:'POST',
+                    url:'/login/submit',
+                    data:{
+                        userId_give: userId,
+                        password_give: password
+                    },
+                    success:function (res){
+                      alert(res.msg)
+                    }
+                })
+            }
+            else{
+                alert('아이디/비밀번호 확인해주셔요')
+            }
+        }
+    </script>
+
+
+
     <style>
         .wrapper {
             width: 700px;
@@ -23,22 +51,30 @@
         <h1>login page</h1>
         <div class="field">
             <p class="control has-icons-left has-icons-right">
-                <input class="input" type="email" placeholder="Email">
+                <input id = "userId" class="input" type="email" placeholder="아이디">
                 <span class="icon is-small is-left">
                     <i class="fas fa-envelope"></i>
                 </span>
-                <span class="icon is-small is-right">
-                    <i class="fas fa-check"></i>
-                </span>
+
             </p>
         </div>
         <div class="field">
             <p class="control has-icons-left">
-                <input class="input" type="password" placeholder="Password">
+                <input id ="password" class="input" type="password" placeholder="비밀번호">
                 <span class="icon is-small is-left">
                     <i class="fas fa-lock"></i>
                 </span>
             </p>
+        </div>
+        <div class="buttons">
+            <div class="registerButton">
+                <button onclick = "login()" class="button is-primary" onclick="newUser()">로그인</button>
+            </div>
+            <div class="cancelButton registerForm ">
+                <a href="/register">
+                    <button onclick = "login()" class="button is-primary">회원 가입</button>
+                </a>
+            </div>
         </div>
     </div>
 
