@@ -1,6 +1,17 @@
 from pymongo import MongoClient
 from bs4 import BeautifulSoup
+
 from db import client
+
+
+
+
+
+
+# from db import client << 이 라인 필요한가요??
+
+from db import client
+
 
 from flask import Flask, render_template, request, jsonify,session, make_response
 from jinja2 import Template
