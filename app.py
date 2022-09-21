@@ -170,7 +170,7 @@ def animal_repost():
 
     animal_details = db.animals.find_one({"_id": ObjectId(detail_id)}, {"_id": False})
     print(animal_details)
-    return jsonify({'animal_details': animal_details})
+    return jsonify({'animal_details': animal_details}, {'msg': '수정 완료!'})
 
 
 if __name__ == '__main__':
