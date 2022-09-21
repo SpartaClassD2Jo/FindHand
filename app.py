@@ -97,7 +97,7 @@ def sign_in():
     else:
         return jsonify({'result': 'fail', 'msg': '아이디/비밀번호가 일치하지 않습니다.'})
     
-# 메인페이지에서 등록하기 버튼을 눌렀을 
+# 메인페이지에서 등록하기 버튼을 눌렀을 때
 @app.route('/posting')
 def posting():
     return render_template('post.html')
@@ -113,6 +113,7 @@ def postGet(id):
     print(clickAnimal)
     # return render_template("detail.html",clickAnimal=clickAnimal)
 
+# 글쓰는 페이지에서 등록하기 버튼 누르기
 @app.route("/post", methods=["POST"])
 def animal_post():
     kind_receive = request.form['kind_give']
@@ -132,6 +133,7 @@ def animal_post():
     db.animal.insert_one(doc)
     return jsonify({'meassage':'등록 완료!'})
 
+# 작성한 글 
 @app.route("/delete", methods=["POST"])
 def deleteAnimal():
     kind_receive = request.form['kind_give']
