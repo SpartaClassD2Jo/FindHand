@@ -1,3 +1,8 @@
+@app.route('/')
+def main():
+    animals = list(db.animals.find({}, {"_id": False}))
+    return render_template("main.html", animals=animals)
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -24,18 +29,45 @@
             crossorigin="anonymous"></script>
 
     <style>
-        h1 {
+
+        .banner {
+            display: flex;
+            height: 300px;
+            background-image: linear-gradient(0deg, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('https://cdn.pixabay.com/photo/2018/09/15/08/14/cat-3678858__340.jpg');
+            background-position: center 40%;
+            background-size: cover;
+            flex-direction: column;
+
+        }
+
+        .title {
             text-align: center;
+            margin: auto;
+
+        }
+        .btns{
+            margin-top: 10px;
+        }
+        .btns > a{
+            margin-left: 5px;
         }
 
         img {
             width: 200px;
             height: 200px;
         }
-        .shelter{
+
+        .shelter, .temp {
             width: auto;
-            height: 500px;
+            height: 50%;
             padding: 10px;
+            overflow: scroll;
+            overflow-x: hidden
+
+        }
+
+        .divider-txt {
+            text-align: center;
         }
 
         .container {
@@ -50,26 +82,50 @@
     </script>
 
 <body>
-<div>
-    <img src="">
-    <h1>Find Hand</h1>
+
+<div class="banner">
+    <div class="btns">
+        <a class="btn btn-primary" href="/login" role="button">Login</a>
+        <a class="btn btn-primary" href="/register" role="button">Register</a>
+    </div>
+    <a href="/"><span class="title"><h1>Find Hand</h1></span></a>
 </div>
+<div class="divider-txt">보호소</div>
 <div class="shelter">
-    <div class="wrap">
-        <div class="container">
-            <div class="row row-cols-auto">
-                {% for animal in animals %}
-                    <div class="col">
-                        <div class="card" style="width: 15rem;">
-                            <img src={{ animal.img }} class="card-img-top">
-                            <div class="card-body">
-                                <p class="card-text">{{ animal.notice_num }}</p>
-                            </div>
+    <div class="container">
+        <div class="row row-cols-auto">
+            {% for animal in animals %}
+            <a href="">
+                <div class="col">
+                    <div class="card" style="width: 15rem;">
+                        <img src={{ animal.img }} class="card-img-top">
+                        <div class="card-body">
+                            <p class="card-text">{{ animal.notice_num }}</p>
                         </div>
                     </div>
-                {% endfor %}
-
-            </div>
+                </div>
+            </a>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+<br>
+<div class="divider-txt">임시보호</div>
+<div class="temp">
+    <div class="container">
+        <div class="row row-cols-auto">
+            {% for animal in animals %}
+            <a href="">
+                <div class="col">
+                    <div class="card" style="width: 15rem;">
+                        <img src={{ animal.img }} class="card-img-top">
+                        <div class="card-body">
+                            <p class="card-text">{{ animal.notice_num }}</p>
+                        </div>
+                    </div>
+                </div>
+            </a>
+            {% endfor %}
         </div>
     </div>
 </div>
