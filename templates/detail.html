@@ -163,11 +163,11 @@
                     console.log(animal_details, kind)
                     let html_temp = `<div id="input-box">
                                         <form>
-                                            <input type="text" value="${kind}"/>
-                                            <input type="text" value="${area}"/>
-                                            <input type="text" value="${sex}"/>
-                                            <input type="text" value="${info}"/>
-                                            <button onclick="rePosting()">등록</button>
+                                            품종 <input id="kind" type="text" value="${kind}"/>
+                                            지역 <input id="area"  type="text" value="${area}"/>
+                                            성별 <input id="sex" type="text" value="${sex}"/>
+                                            INFO <input id="info" type="text" value="${info}"/>
+                                             <button onclick="rePosting()">등록</button>
                                         </form>
                                     </div>`
                     $("#input-box").append(html_temp)
