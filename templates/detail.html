@@ -132,18 +132,16 @@
 
 
         function deletePost() {
-            let kind = $('#kind').val()
-            let area = $('#area').val()
-            let sex = $('#sex').val()
-            let info = $('#info').val()
-
-             $.ajax({
-                type: 'POST',
+            let url = window.location.href.split("/")
+            let id = url[url.length - 1]
+            console.log(id)
+            $.ajax({
+                type: 'GET',
                 url: '/delete',
-                data: {kind_give: kind, area_give: area, sex_give: sex, info_give: info},
+                data: {"id_give": id},
                 success: function (response) {
                     alert(response['msg'])
-                    window.location.reload()
+                    window.location.href = '/'
                 }
             });
         }
