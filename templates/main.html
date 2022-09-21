@@ -92,6 +92,7 @@
 <div class="banner">
     <div class="btns">
         <a class="btn btn-primary" onclick = "logOut()" role="button">로그 아웃</a>
+        <a class="btn btn-primary" href="/posting" role="button">Animal POST</a>
     </div>
     <div class = "username">
         안녕하세요 {{nickname }} 님!
@@ -103,16 +104,16 @@
     <div class="container">
         <div class="row row-cols-auto">
             {% for animal in animals %}
-            <a href="">
-                <div class="col">
-                    <div class="card" style="width: 15rem;">
-                        <img src={{ animal.img }} class="card-img-top">
-                        <div class="card-body">
-                            <p class="card-text">{{ animal.notice_num }}</p>
+                <a href="/detail/{{ animal._id }}">
+                    <div class="col">
+                        <div class="card" style="width: 15rem;">
+                            <img src={{ animal.img }} class="card-img-top">
+                            <div class="card-body">
+                                <p class="card-text">{{ animal.notice_num }}</p>
+                            </div>
                         </div>
                     </div>
-                </div>
-            </a>
+                </a>
             {% endfor %}
         </div>
     </div>
@@ -123,16 +124,18 @@
     <div class="container">
         <div class="row row-cols-auto">
             {% for animal in animals %}
-            <a href="">
-                <div class="col">
-                    <div class="card" style="width: 15rem;">
-                        <img src={{ animal.img }} class="card-img-top">
-                        <div class="card-body">
-                            <p class="card-text">{{ animal.notice_num }}</p>
+                {% if animal.inputValue %}
+                    <a href="/detail/{{ animal._id }}">
+                        <div class="col">
+                            <div class="card" style="width: 15rem;">
+                                <img src={{ animal.img }} class="card-img-top">
+                                <div class="card-body">
+                                    <p class="card-text">{{ animal.notice_num }}</p>
+                                </div>
+                            </div>
                         </div>
-                    </div>
-                </div>
-            </a>
+                    </a>
+                {% endif %}
             {% endfor %}
         </div>
     </div>
