@@ -1,4 +1,5 @@
 from pymongo import MongoClient
+from bson.objectid import ObjectId
 from bs4 import BeautifulSoup
 import certifi
 from jinja2 import Template
