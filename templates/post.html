@@ -13,20 +13,21 @@
           crossorigin="anonymous">
     
     <style>
-    * {
-    margin: 0;
-    padding: 0;
-    list-style: none;
-}
 
-/*루트*/
+        *{
+            margin:0;
+            padding:0;
+            list-style: none;
+        }
+        /*루트*/
 #root {
     width: 100%;
     height: 100vh;
     display: flex;
     align-items: center;
     justify-content: center;
-    background-image: url("https://cdn.pixabay.com/photo/2016/04/12/22/35/watercolour-1325656__480.jpg");
+    background-image: url("https://p4.wallpaperbetter.com/wallpaper/941/355/705/sky-blue-pastel-spring-wallpaper-preview.jpg");
+
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center;
@@ -34,52 +35,86 @@
 
 /*컨텐츠 박스*/
 #content-box {
-    width: 800px;
-    height: 800px;
+    width: 600px;
+    height: 1000px;
     background-color: rgba(0,0,0,0.3);
-
-    display: flex;
-    flex-direction: row;
-    border-radius: 10px;
-    align-items: center;
-    justify-content: center;
-
-}
-
-/*인풋 박스*/
-#input-box {
-    width:80%;
-    height:100%;
-    /*background-color: skyblue;*/
 
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    border-radius: 10px;
+    padding: 0 20px 0 20px;
+
 }
 
+#flex-box {
+    width:100%;
+    heigth:40%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    {#background-color: red;#}
+    margin-bottom:30px;
+    padding:30px 0 30px 0;
+}
+/*이미지 박스*/
+#img-box {
+    width:250px;
+    height:250px;
+    background-color: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding-top:10px;
+}
+
+#input-box ul  {
+    width:100%;
+    display:flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+/*인풋 박스*/
+#input-box {
+    width:100%;
+    height:60%;
+    {#background-color: skyblue;#}
+    display:flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+
 /*인풋 박스안의 인풋*/
-#input-box input {
-    width: 450px;
-    height: 50px;
+#input-box li {
+    width: 80%;
+    height:70px;
     border-radius: 10px;
     border:none;
     margin: 10px 0 10px 0;
+    background-color: white;
+    display: flex;
+    align-items: center;
+    margin-bottom:15px;
+    border:none;
 }
 
-/*인풋 박스안의 특징 인풋*/
-#input-box ul li:nth-child(5) input {
-    height: 300px;
+#input-box li:last-child {
+    height:130px;
 }
-
 
 /*버튼 박스*/
 #button-box {
-    /*background-color: red;*/
-    width:400px;
+    width:90%;
     display: flex;
     justify-content: flex-end;
-    margin-top:10px;
+    margin-top:20px;
+
 }
 
 /*버튼 박스안의 버튼*/
@@ -88,15 +123,18 @@
     height: 30px;
     border-radius: 5px;
     border:none;
-    background-color:white;
+    background-color:#1f6acF;color:white ;
 }
 
 /*취소 버튼*/
 #button-box button:nth-child(1) {
     margin-right: 10px;
 }
-       
-</style>
+
+input {
+    border:none;
+}
+    </style>
 
     <script>
         function mainPage() {
