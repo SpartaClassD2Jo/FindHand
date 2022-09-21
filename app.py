@@ -131,10 +131,11 @@ def animal_post():
         'area': area_receive,
         'sex': sex_receive,
         'info': info_receive,
-        'img': url_receive
+        'img': url_receive,
+        'inputValue': True
     }
 
-    db.animal.insert_one(doc)
+    db.animals.insert_one(doc)
     return jsonify({'meassage': '등록 완료!'})
 
 
