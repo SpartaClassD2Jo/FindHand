@@ -12,7 +12,14 @@
           crossorigin="anonymous">
     <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
 
-
+    <!-- font  -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fugaz+One&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap"
+          rel="stylesheet">
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
@@ -22,30 +29,64 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
             integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
             crossorigin="anonymous"></script>
-    <script src="https://code.jquery.com/jquery-3.6.1.slim.min.js" integrity="sha256-w8CvhFs7iHNVUtnSP0YKEg00p9Ih13rlL9zGqvLdePA=" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.6.1.slim.min.js"
+            integrity="sha256-w8CvhFs7iHNVUtnSP0YKEg00p9Ih13rlL9zGqvLdePA=" crossorigin="anonymous"></script>
 
     <style>
 
+        * {
+            font-family: 'Noto Sans KR', sans-serif;
+        }
+
+        .top_div {
+            background-color: #1f6acF;
+            width: inherit;
+            height: 10px;
+        }
+
         .banner {
             display: flex;
-            height: 300px;
-            background-image: linear-gradient(0deg, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('https://cdn.pixabay.com/photo/2018/09/15/08/14/cat-3678858__340.jpg');
-            background-position: center 40%;
+            height: 400px;
+            background-image: linear-gradient(0deg, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('https://apms.epis.or.kr/apms/img/contents/s2_01_img1.png');
+            background-position: center;
             background-size: cover;
             flex-direction: column;
         }
 
+
         .title {
             text-align: center;
             margin: auto;
+
+            font-family: 'Fugaz One', cursive;
+            font-size: xx-large;
+            color: white;
         }
 
         .btns {
-            margin-top: 10px;
+            margin: 30px 30px 10px 0;
+
+            display: flex;
+            flex-direction: row;
+            justify-content: flex-end;
+
         }
 
         .btns > a {
+            width: 90px;
+            height: 35px;
             margin-left: 5px;
+            font-size: x-small;
+            background-color: transparent;
+            color: white;
+
+            border-style: none;
+            border-radius: 20px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
         }
 
         img {
@@ -63,15 +104,41 @@
         }
 
         .divider-txt {
+            width: 60%;
+            height: 30px;
+
             text-align: center;
+            margin-top: 0px;
+            background-color: #1f6acF;
+
+            font-size: small;
+            color: white;
         }
 
         .container {
             display: flex;
             height: 500px;
         }
-        .username{
-            color:white
+
+        .username {
+            margin-right: 45px;
+            margin-bottom: 40px;
+            display: flex;
+            justify-content: flex-end;
+            color: white;
+
+            font-size: x-small;
+        }
+
+        .divider-txt-box {
+            width: inherit;
+            height: 30px;
+            background-color: #eef0ef;
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
         }
 
     </style>
@@ -80,7 +147,7 @@
             console.log(localStorage.getItem("session"));
         });
 
-        function logOut(){
+        function logOut() {
             document.cookie = "mytoken" + "=;expires=Thu, 01 Jan 1970 00:00:00 GMT;path=['/']"
             window.location.href = "/login"
         }
@@ -90,61 +157,62 @@
 <body>
 
 <div class="banner">
+    <!-- 사진이 초록색이라 파란색이랑 매치안되서 파란색이랑 조화시키려고 우겨놓은 div(의미 x)    -->
+    <div class="top_div"></div>
     <div class="btns">
-        <a class="btn btn-primary" onclick = "logOut()" role="button">로그 아웃</a>
+        <a class="btn btn-primary" onclick="logOut()" role="button" style="color:#ffffff">로그 아웃</a>
         <a class="btn btn-primary" href="/posting" role="button">Animal POST</a>
     </div>
-    <div class = "username">
+
+    <div class="username">
         안녕하세요 {{nickname }} 님!
     </div>
     <a href="/"><span class="title"><h1>Find Hand</h1></span></a>
 </div>
-<div class="divider-txt">보호소</div>
+<div class="divider-txt-box">
+    <div class="divider-txt">보호소</div>
+</div>
 <div class="shelter">
     <div class="container">
         <div class="row row-cols-auto">
             {% for animal in animals %}
-                {% if animal.inputValue == False %}
-                <a href="/detail/{{ animal._id }}">
-                    <div class="col">
-                        <div class="card" style="width: 15rem;">
-                            <img src={{ animal.img }} class="card-img-top">
-                            <div class="card-body">
-                                <p class="card-text">{{ animal.notice_num }}</p>
-                            </div>
+            <a href="/detail/{{ animal._id }}">
+                <div class="col">
+                    <div class="card" style="width: 15rem;">
+                        <img src={{ animal.img }} class="card-img-top">
+                        <div class="card-body">
+                            <p class="card-text">{{ animal.notice_num }}</p>
                         </div>
                     </div>
-                </a>
-                {% endif %}
+                </div>
+            </a>
             {% endfor %}
         </div>
     </div>
 </div>
 <br>
-<div class="divider-txt">임시보호</div>
+<div class="divider-txt-box">
+    <div class="divider-txt">임시보호</div>
+</div>
 <div class="temp">
     <div class="container">
         <div class="row row-cols-auto">
             {% for animal in animals %}
-                {% if animal.inputValue %}
-                    <a href="/detail/{{ animal._id }}">
-                        <div class="col">
-                            <div class="card" style="width: 15rem;">
-                                <img src={{ animal.img }} class="card-img-top">
-                                <div class="card-body">
-                                    <p class="card-text">{{ animal.notice_num }}</p>
-                                </div>
-                            </div>
+            {% if animal.inputValue %}
+            <a href="/detail/{{ animal._id }}">
+                <div class="col">
+                    <div class="card" style="width: 15rem;">
+                        <img src={{ animal.img }} class="card-img-top">
+                        <div class="card-body">
+                            <p class="card-text">{{ animal.notice_num }}</p>
                         </div>
-                    </a>
-                {% endif %}
+                    </div>
+                </div>
+            </a>
+            {% endif %}
             {% endfor %}
         </div>
     </div>
 </div>
 </body>
 </html>
-
-
-
-
