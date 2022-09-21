@@ -52,7 +52,7 @@ def register_page():
 def check_duplicate():
     email = request.form['email_give']
     print(email)
-    existing_user = bool(list(db.weekone.find({'email':email})))
+    existing_user = bool(list(db.users.find({'username':email})))
     print(existing_user)
     if existing_user:
         return jsonify({'msg':'이미 사용중인 아이디입니다'})
@@ -67,10 +67,10 @@ def register_newuser():
     password_receive = request.form['password_give']
     pw_hash = hashlib.sha256(password_receive.encode('utf-8')).hexdigest()
     doc = {
-        "email" : email_receive,
+        "username" : email_receive,
         "password" : pw_hash
     }
-    db.weekone.insert_one(doc)
+    db.users.insert_one(doc)
     return jsonify({'msg':'회원 가입 완료!'})
 
 
