@@ -220,13 +220,13 @@
     <div class="container">
         <div class="row row-cols-auto">
             {% for animal in animals %}
-            {% if animal.inputValue == False %}
+            {% if animal.inputValue %}
             <a href="/detail/{{ animal._id }}">
                 <div class="col">
                     <div class="card" style="width: 15rem;">
                         <img src={{ animal.img }} class="card-img-top">
                         <div class="card-body">
-                            <p class="card-text">{{ animal.notice_num }}</p>
+                            <p class="card-text">{{ animal.area }}</p>
                         </div>
                     </div>
                 </div>
