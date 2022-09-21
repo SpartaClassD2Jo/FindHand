@@ -239,7 +239,7 @@
     <div class="container">
         <div class="row row-cols-auto">
             {% for animal in animals %}
-            {% if animal.inputValue == true %}
+            {% if animal.inputValue == false %}
             <a href="/detail/{{ animal._id }}">
                 <div class="col">
                     <div class="card" style="width: 15rem;">
@@ -265,7 +265,7 @@
     <div class="container">
         <div class="row row-cols-auto">
             {% for animal in animals %}
-            {% if animal.inputValue == false %}
+            {% if animal.inputValue == true %}
             <a href="/detail/{{ animal._id }}">
                 <div class="col">
                     <div class="card" style="width: 15rem;">
