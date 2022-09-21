@@ -153,6 +153,14 @@ def deleteAnimal():
     db.animal.delete_one(deleteAnimal)
     return jsonify({'msg': '삭제 완료!'})
 
-
+ # 글 수정버튼 
+@app.route("/api/edit", methods=["GET"])
+def animal_edit():
+    detail_id = request.args.get("id_give")
+    print(detail_id)
+    animal_details = db.animals.find({"_id": detail_id}, {"_id": False})
+    print(animal_details)
+    return jsonify({'animal_details': animal_details})
+  
 if __name__ == '__main__':
     app.run('0.0.0.0', port=5010, debug=True)
