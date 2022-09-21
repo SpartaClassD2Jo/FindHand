@@ -22,6 +22,7 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
             integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
             crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.6.1.slim.min.js" integrity="sha256-w8CvhFs7iHNVUtnSP0YKEg00p9Ih13rlL9zGqvLdePA=" crossorigin="anonymous"></script>
 
     <style>
 
@@ -32,18 +33,18 @@
             background-position: center 40%;
             background-size: cover;
             flex-direction: column;
-
         }
 
         .title {
             text-align: center;
             margin: auto;
-
         }
-        .btns{
+
+        .btns {
             margin-top: 10px;
         }
-        .btns > a{
+
+        .btns > a {
             margin-left: 5px;
         }
 
@@ -69,10 +70,20 @@
             display: flex;
             height: 500px;
         }
-
+        .username{
+            color:white
+        }
 
     </style>
     <script>
+        $(document).ready(function () {
+            console.log(localStorage.getItem("session"));
+        });
+
+        function logOut(){
+            document.cookie = "mytoken" + "=;expires=Thu, 01 Jan 1970 00:00:00 GMT;path=['/']"
+            window.location.href = "/login"
+        }
 
     </script>
 
@@ -80,8 +91,10 @@
 
 <div class="banner">
     <div class="btns">
-        <a class="btn btn-primary" href="/login" role="button">Login</a>
-        <a class="btn btn-primary" href="/register" role="button">Register</a>
+        <a class="btn btn-primary" onclick = "logOut()" role="button">로그 아웃</a>
+    </div>
+    <div class = "username">
+        안녕하세요 {{nickname }} 님!
     </div>
     <a href="/"><span class="title"><h1>Find Hand</h1></span></a>
 </div>
@@ -124,6 +137,9 @@
         </div>
     </div>
 </div>
-
 </body>
 </html>
+
+
+
+
