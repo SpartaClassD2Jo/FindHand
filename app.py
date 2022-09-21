@@ -133,7 +133,7 @@ def animal_post():
     db.animal.insert_one(doc)
     return jsonify({'meassage':'등록 완료!'})
 
-# 작성한 글 
+# 작성한 글 삭제하기 
 @app.route("/delete", methods=["POST"])
 def deleteAnimal():
     kind_receive = request.form['kind_give']
