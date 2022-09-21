@@ -190,7 +190,7 @@
                 url: `/api/post`,
                 data: {kind_give: kind, area_give: area, sex_give: sex, info_give: info, "id_give": id},
                 success: function (response) {
-                    let animal_details = response["animal_details"];
+                    let animal_details = response[0]["animal_details"];
                     let kind = animal_details["kind"]
                     let area = animal_details["area"]
                     let sex = animal_details["sex"]
@@ -206,6 +206,7 @@
                                         </form>
                                     </div>`
                     $("#input-box").append(html_temp)
+                     alert(response[1]['msg'])
 
 
 
