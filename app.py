@@ -1,14 +1,13 @@
 from pymongo import MongoClient
 from bs4 import BeautifulSoup
 from db import client
-
-from flask import Flask, render_template, request, jsonify,session, make_response
+import certifi
 from jinja2 import Template
 import requests
 import jwt
 import datetime
 import hashlib
-from flask import Flask, render_template, jsonify, request, redirect, url_for
+from flask import Flask, render_template, jsonify, request, redirect, url_for,session, make_response
 from werkzeug.utils import secure_filename
 from datetime import datetime, timedelta
 
@@ -17,8 +16,6 @@ app = Flask(__name__)
 
 SECRET_KEY = 'SPARTA'
 
-from pymongo import MongoClient
-import certifi
 
 
 ca = certifi.where()
@@ -40,10 +37,12 @@ def home():
     except jwt.exceptions.DecodeError:
         return redirect(url_for("login", msg="로그인 정보가 존재하지 않습니다."))
 
+
 @app.route('/login')
 def login():
     msg = request.args.get("msg")
     return render_template('login.html', msg=msg)
+
 
 # 회원 가입 페이지 보여주는 API
 @app.route('/register')
@@ -56,7 +55,7 @@ def register_page():
 def check_duplicate():
     email = request.form['email_give']
     print(email)
-    existing_user = bool(list(db.users.find({'username':email})))
+    existing_user = bool(list(db.users.find({'email':email})))
     print(existing_user)
     if existing_user:
         return jsonify({'msg':'이미 사용중인 아이디입니다'})
@@ -71,7 +70,7 @@ def register_newuser():
     password_receive = request.form['password_give']
     pw_hash = hashlib.sha256(password_receive.encode('utf-8')).hexdigest()
     doc = {
-        "username" : email_receive,
+        "email" : email_receive,
         "password" : pw_hash
     }
     db.users.insert_one(doc)
