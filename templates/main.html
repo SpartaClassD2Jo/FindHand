@@ -38,6 +38,20 @@
             font-family: 'Noto Sans KR', sans-serif;
         }
 
+        .card {
+            
+            width: 230px;
+            padding:10px;
+            border:solid 1px #eef0eb;
+            margin-bottom: 20px;
+
+            border: solid 1.0px #eef0eb;
+        /*그냥 목록 선을 넣기로 했답니다..!!!!!!!!!*/
+
+
+
+        }
+
         .top_div {
             background-color: #1f6acF;
             width: inherit;
@@ -119,8 +133,7 @@
             display: flex;
             height: 500px;
             margin:0 auto;
-            justify-content:center;
-
+            justify-content: center;
         }
          .row{
             justify-content:center;
@@ -153,14 +166,43 @@
             display: flex;
             justify-content: center;
             align-items: center;
+            margin-top:15px;
         }
         .temp_wrap{
              width: 100%;
             display: flex;
             justify-content: center;
             align-items: center;
+            margin-top:15px;
         }
+        .card-img-top{
+            margin-left: 20px;
+            margin-top: 10px;
+            width:180px;
+            height: 180px;
 
+            border-radius: 5px;
+
+
+        }
+        .card-text{
+
+            width: 220px;
+            text-align: center;
+            font-size: small;
+
+            color: black;
+
+            width: 200px;
+            height: 20px;
+            background-color: #f4f9f1;
+
+        }
+        .card-body{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
     </style>
     <script>
         $(document).ready(function () {
@@ -197,7 +239,6 @@
     <div class="container">
         <div class="row row-cols-auto">
             {% for animal in animals %}
-            {% if animal.inputValue == false %}
             <a href="/detail/{{ animal._id }}">
                 <div class="col">
                     <div class="card" style="width: 15rem;">
@@ -208,7 +249,6 @@
                     </div>
                 </div>
             </a>
-            {% endif %}
             {% endfor %}
         </div>
     </div>
@@ -223,7 +263,7 @@
     <div class="container">
         <div class="row row-cols-auto">
             {% for animal in animals %}
-            {% if animal.inputValue == true %}
+            {% if animal.inputValue %}
             <a href="/detail/{{ animal._id }}">
                 <div class="col">
                     <div class="card" style="width: 15rem;">
@@ -242,4 +282,3 @@
 </div>
 </body>
 </html>
-
