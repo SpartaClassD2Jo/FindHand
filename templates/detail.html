@@ -147,6 +147,22 @@
                 }
             });
         }
+        
+        function editPost() {
+            let url = window.location.href.split("/")
+            let id = url[url.length - 1]
+            $("#input-box").empty()
+            $.ajax({
+                type: 'GET',
+                url: `api/edit`,
+                data: {id_give: id},
+                success: function (response) {
+                    let animal_details = response["animal_details"];
+
+
+                }
+            });
+        }
 
     </script>
 </head>
@@ -164,7 +180,7 @@
                     <li>{{ clickAnimal }}</li>
                 </ul>
                 <div id="button-box">
-                    <button>수정</button>
+                    <button onclick="editPost()">수정</button>
                     <button onclick="deletePost()">삭제</button>
                 </div>
             </div>
