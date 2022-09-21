@@ -28,8 +28,7 @@ def home():
         payload = jwt.decode(token_receive, SECRET_KEY, algorithms=['HS256'])
         
         animals = list(db.animals.find({}))
-        temp_animals = list(db.animal.find({}))
-        return render_template("main.html", animals=animals, temp_animals=temp_animals)
+        return render_template("main.html", animals=animals)
 
     
     except jwt.ExpiredSignatureError:
