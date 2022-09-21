@@ -97,13 +97,14 @@ def sign_in():
     else:
         return jsonify({'result': 'fail', 'msg': '아이디/비밀번호가 일치하지 않습니다.'})
     
+# 메인페이지에서 등록하기 버튼을 눌렀을 
 @app.route('/posting')
 def posting():
     return render_template('post.html')
 
-@app.route('/animalList')
-def main():
-    return render_template('animalList.html')
+# @app.route('/animalList')
+# def main():
+#     return render_template('animalList.html')
 
 # 메인페이지에서 세부 동물정보 불러오기
 @app.route("/detail/<id>")
