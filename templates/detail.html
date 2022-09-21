@@ -4,8 +4,7 @@
     <meta charset="UTF-8">
     <title>Title</title>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-    <link rel="stylesheet" href="{{ url_for('static', filename='detail.css') }}">
-    
+
 <style>
     * {
     margin: 0;
@@ -124,12 +123,13 @@
 #button-box button:nth-child(1) {
     margin-right: 10px;
 }
-    
+
 </style>
     <script>
         function mainPage() {
             window.location.href = '/'
         }
+
 
         function deletePost() {
             let kind = $('#kind').val()
@@ -147,7 +147,7 @@
                 }
             });
         }
-        
+
         function editPost() {
             let url = window.location.href.split("/")
             let id = url[url.length - 1]
@@ -213,7 +213,7 @@
                 }
             });
         }
-        
+
 
     </script>
 </head>
@@ -221,14 +221,19 @@
     <div id="root">
         <div id="content-box">
             <div id="img-box">
-                <img src="http://www.usjournal.kr/news/data/20220416/p1065605892282128_336_thum.jpg" alt="">
+{#                <img src="http://www.usjournal.kr/news/data/20220416/p1065605892282128_336_thum.jpg" alt="">#}
+                <img src={{ clickAnimal['img'] }} alt="">
             </div>
             <div id="input-box">
                 <ul>
-                    <li>{{ clickAnimal }}</li>
-                    <li>{{ clickAnimal }}</li>
-                    <li>{{ clickAnimal }}</li>
-                    <li>{{ clickAnimal }}</li>
+                    {% if clickAnimal['notice'] %}
+<li>{{ clickAnimal['notice'] }}</li>
+{% else %}
+<li>{{ clickAnimal['notice_num'] }}</li>
+{% endif %}
+<li>{{ clickAnimal['kind'] }}</li>
+<li>{{ clickAnimal['area'] }}</li>
+<li>{{ clickAnimal['sex'] }}</li>
                 </ul>
                 <div id="button-box">
                     <button onclick="editPost()">수정</button>
