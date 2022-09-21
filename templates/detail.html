@@ -31,16 +31,16 @@
             background-color: #1f6acF;
             width: inherit;
             height: 10px;
-    position:absolute;
-    top:0
+            position:absolute;
+            top:0
         }
 
 /*메인페이지 버튼*/
 #mainPageBtn {
-    position:relative;
-    bottom:530px;
-    right:100px;
 
+    position: absolute;
+    top : 12%;
+    left: 55%;
     width: 100px;
     height: 30px;
     border-radius: 5px;
@@ -51,12 +51,15 @@
 
 /*컨텐츠 박스*/
 #content-box {
-    width: 600px;
-    height: 1000px;
+    width: 350px;
+    height: 600px;
     background-color: rgba(0,0,0,0.3);
 
+    margin-top: 80px;
     display: flex;
     flex-direction: column;
+    align-items: center;
+    justify-content: center;
     border-radius: 10px;
     padding: 0 20px 0 20px;
 
@@ -64,8 +67,8 @@
 
 /*이미지 박스*/
 #img-box {
-    width:100%;
-    height:50%;
+    width:70%;
+    height:40%;
     {#background-color: salmon;#}
     display: flex;
     align-items: center;
@@ -85,12 +88,13 @@
 #input-box {
     width:100%;
     height:50%;
-    {#background-color: skyblue;#}
+    /*background-color: skyblue;*/
 
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    font-size: small;
 }
 
 /*인풋 박스안의 ul*/
@@ -102,7 +106,7 @@
 /*인풋 박스안의 인풋*/
 #input-box li {
     width: 95%;
-    height:70px;
+    height:40px;
     border-radius: 10px;
     border:none;
     margin: 10px 0 10px 0;
@@ -115,7 +119,7 @@
 
 /*인풋 박스안의 특징 인풋*/
 #input-box > ul > li:nth-child(4) {
-    height: 110px;
+    height: 60px;
 }
 
 /*버튼 박스*/
