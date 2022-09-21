@@ -153,12 +153,29 @@ def deleteAnimal():
     db.animal.delete_one(deleteAnimal)
     return jsonify({'msg': '삭제 완료!'})
 
- # 글 수정버튼 
+ # 글 수정시 
 @app.route("/api/edit", methods=["GET"])
 def animal_edit():
     detail_id = request.args.get("id_give")
-    animal_details = db.animals.find_one({"_id": ObjectId(detail_id)}, {"_id": False}
+    animal_details = db.animals.find_one({"_id": ObjectId(detail_id)}, {"_id": False}                                 
     return jsonify({'animal_details': animal_details})
+
+ # 글 수정 후 재등록시  
+@app.route("/api/post", methods=["POST"])
+def animal_repost():
+    detail_id = request.form["id_give"]
+    kind_receive = request.form['kind_give']
+    area_receive = request.form['area_give']
+    sex_receive = request.form['sex_give']
+    info_receive = request.form['info_give']
+
+    db.animals.update_many({"_id": ObjectId(detail_id)}, {
+        "$set": {'kind': kind_receive, 'area': area_receive, 'sex': sex_receive, 'info': info_receive}})
+
+    animal_details = db.animals.find_one({"_id": ObjectId(detail_id)}, {"_id": False})
+    print(animal_details)
+    return jsonify({'animal_details': animal_details})                                         
+                                         
   
 if __name__ == '__main__':
     app.run('0.0.0.0', port=5010, debug=True)
