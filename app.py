@@ -157,9 +157,7 @@ def deleteAnimal():
 @app.route("/api/edit", methods=["GET"])
 def animal_edit():
     detail_id = request.args.get("id_give")
-    print(detail_id)
-    animal_details = db.animals.find({"_id": detail_id}, {"_id": False})
-    print(animal_details)
+    animal_details = db.animals.find_one({"_id": ObjectId(detail_id)}, {"_id": False}
     return jsonify({'animal_details': animal_details})
   
 if __name__ == '__main__':
