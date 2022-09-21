@@ -29,8 +29,12 @@ def home():
     token_receive = request.cookies.get('mytoken')
     try:
         payload = jwt.decode(token_receive, SECRET_KEY, algorithms=['HS256'])
+        
+        animals = list(db.animals.find({}))
+        temp_animals = list(db.animal.find({}))
+        return render_template("main.html", animals=animals, temp_animals=temp_animals)
 
-        return render_template('index.html')
+    
     except jwt.ExpiredSignatureError:
         return redirect(url_for("login", msg="로그인 시간이 만료되었습니다."))
     except jwt.exceptions.DecodeError:
