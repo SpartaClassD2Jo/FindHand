@@ -140,14 +140,11 @@ def animal_post():
 
 
 # 작성한 글 삭제하기
-@app.route("/delete", methods=["POST"])
-def deleteAnimal():
-    kind_receive = request.form['kind_give']
-    area_receive = request.form['area_give']
-    sex_receive = request.form['sex_give']
-    info_receive = request.form['info_give']
-    deleteAnimal = db.animal.find_one({'kind': kind_receive}, {'area': area_receive})
-    db.animal.delete_one(deleteAnimal)
+@app.route("/delete", methods=["GET"])
+def delete_animal():
+    detail_id = request.args.get("id_give")
+    print(detail_id)
+    db.animals.delete_one({"_id": ObjectId(detail_id)})
     return jsonify({'msg': '삭제 완료!'})
 
 
