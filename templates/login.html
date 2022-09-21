@@ -14,34 +14,86 @@
     <title>Title</title>
 
     <style>
+
+        * {
+
+
+        }
         #root {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
+
+            display: flex;
+            flex-direction: row;
         }
 
-        .container {
+        .content {
             width: 100vw;
+            height: 60vh;
+
+            background-color: #1f6acf;
+
+            position: absolute;
+
+        }
+        .container {
+            width: 50vw;
             height: 100vh;
-            margin-top: 200px;
+            margin-top: 180px;
+
 
         }
 
         .box {
-            height: 280px;
+            height: 440px;
             padding: 1rem 1.5rem;
-            max-width: 750px;
+            margin: auto;
+
+            max-width: 400px;
+            border-radius: 10px;
+            background-color:#0080ff;
+
             margin: auto;
 
         }
+        .login_title{
+            font-weight: 800;
+            font-size:xxx-large;
+            text-align: center;
+            color: #eef0eb;
+
+            margin: 20px 0 40px 0;
+        }
 
         .input {
-            margin: 5px 0 10px 0;
+            margin: 0px 0 10px 0;
+
         }
 
         .is-mobile {
-            margin: 5px 0 10px 0;
+            margin: 0px 0 20px 0;
         }
+
+        .button {
+            border: solid 1px #f4f9e9;
+            background-color: #f4f9e9;
+
+            color: #1f6acf;
+        }
+
+         .login_btn {
+            margin-bottom: 15px ;
+        }
+
+         .membershipquestion {
+
+             margin-bottom: 10px;
+             font-size: small;
+
+
+             color: #eef0eb;
+         }
     </style>
 
     <script>
@@ -83,41 +135,51 @@
                 }
             });
         }
+
+        function to_main(){
+            window.location.href='/register'
+        }
     </script>
 </head>
 <body>
-<div id="root">
-    <div class="container">
-        <div class="box" style="max-width: 400px; margin: auto; background-color: green">
+    <div id="root">
+        <div class ="content">
+            <!--이미지   / 혹은 단색  -->
+        </div>
+        <div class="container">
+            <div class="box">
+                <h3 class="login_title">Welcome</h3>
+                <div class="control has-icons-left" style="width:100%">
+                    <input id="input-username" class="input" type="text" placeholder="아이디">
+                    <span class="icon is-small is-left"><i class="fa fa-user"></i></span>
+                    <p id="help-id-login" class="help is-danger"></p>
+                </div>
 
-            <div class="control has-icons-left" style="width:100%">
-                <input id="input-username" class="input" type="text" placeholder="아이디">
-                <span class="icon is-small is-left"><i class="fa fa-user"></i></span>
-                <p id="help-id-login" class="help is-danger"></p>
-            </div>
-
-            <div class="control has-icons-left">
-                <input id="input-password" class="input" type="password" placeholder="비밀번호">
-                <span class="icon is-small is-left"><i class="fa fa-lock"></i></span>
-                <p id="help-password-login" class="help is-danger"></p>
-            </div>
+                <div class="control has-icons-left">
+                    <input id="input-password" class="input" type="password" placeholder="비밀번호">
+                    <span class="icon is-small is-left"><i class="fa fa-lock"></i></span>
+                    <p id="help-password-login" class="help is-danger"></p>
+                </div>
 
 
-            <nav class="level is-mobile">
-                <button class="level-item button is-sparta" onclick="sign_in()">
-                    로그인
-                </button>
-                <a href="/register">
-                    <button class="level-item button is-sparta" onclick="Tosign_up">
+                <nav class="level is-mobile">
+                    <button class="level-item button is-sparta login_btn" onclick="sign_in()">
+                        로그인
+                    </button>
+                </nav>
+
+                <p class="membershipquestion">아직, 회원이 아니신가요? </p>
+
+                <nav class="level is-mobile">
+                    <button class="level-item button is-sparta" onclick="to_main()">
                         회원가입
                     </button>
-                </a>
-            </nav>
+                </nav>
+
+            </div>
 
         </div>
-
     </div>
-</div>
 </body>
 </html>
 
