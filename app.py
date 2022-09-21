@@ -21,7 +21,7 @@ SECRET_KEY = 'SPARTA'
 ca = certifi.where()
 db = client.dbsparta_plus_week4
 
-@app.route('/')
+@app.route('/animalList')
 def home():
     token_receive = request.cookies.get('mytoken')
     try:
