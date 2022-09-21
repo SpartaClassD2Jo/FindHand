@@ -97,6 +97,54 @@ def sign_in():
     # 찾지 못하면
     else:
         return jsonify({'result': 'fail', 'msg': '아이디/비밀번호가 일치하지 않습니다.'})
+    
+    @app.route('/')
+def home():
+    return render_template('post.html')
+
+@app.route('/animalList')
+def main():
+    return render_template('animalList.html')
+
+@app.route('/detail')
+def detail():
+    return render_template('detail.html')
+
+# 메인페이지에서 세부 동물정보 불러오기
+@app.route("/detail/<id>")
+def postGet(id):
+    clickAnimal = list(db.animals.find({'_id': id}))
+    print(clickAnimal)
+    # return render_template("detail.html",clickAnimal=clickAnimal)
+
+@app.route("/post", methods=["POST"])
+def animal_post():
+    kind_receive = request.form['kind_give']
+    area_receive = request.form['area_give']
+    sex_receive = request.form['sex_give']
+    info_receive = request.form['info_give']
+    url_receive = request.form["url_give"]
+
+    doc = {
+        'kind':kind_receive,
+        'area':area_receive,
+        'sex':sex_receive,
+        'info':info_receive,
+        'url':url_receive
+    }
+
+    db.animal.insert_one(doc)
+    return jsonify({'meassage':'등록 완료!'})
+
+@app.route("/delete", methods=["POST"])
+def deleteAnimal():
+    kind_receive = request.form['kind_give']
+    area_receive = request.form['area_give']
+    sex_receive = request.form['sex_give']
+    info_receive = request.form['info_give']
+    deleteAnimal = db.animal.find_one({'kind': kind_receive}, {'area':area_receive})
+    db.animal.delete_one(deleteAnimal)
+    return jsonify({'msg': '삭제 완료!'})
 
 if __name__ == '__main__':
     app.run('0.0.0.0', port=5010, debug=True)
