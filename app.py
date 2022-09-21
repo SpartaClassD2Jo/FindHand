@@ -136,7 +136,7 @@ def animal_post():
         'area': area_receive,
         'sex': sex_receive,
         'info': info_receive,
-        'url': url_receive
+        'img': url_receive
     }
 
     db.animal.insert_one(doc)
