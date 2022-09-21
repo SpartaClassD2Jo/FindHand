@@ -8,7 +8,7 @@ from pymongo import MongoClient
 client = MongoClient('mongodb+srv://test:sparta@cluster0.onepf4f.mongodb.net/?retryWrites=true&w=majority', 27017)
 db = client.dbsparta
 
-
+# 총 10page 
 for i in range(1, 10):
     chrome_options = webdriver.ChromeOptions()
     driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()), options=chrome_options)
