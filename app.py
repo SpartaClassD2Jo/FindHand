@@ -27,7 +27,7 @@ def home():
 
         animals = list(db.animals.find({}))
         user = db.users.find_one({'username': payload['id']})
-        return render_template("main.html", animals=animals, nickname = user['nickname']  )
+        return render_template("main.html", animals=animals, nickname=user['nickname'])
 
 
     except jwt.ExpiredSignatureError:
@@ -37,7 +37,6 @@ def home():
 
 
 # 메인 페이지 landing 시에 유저 정보 가져오는 API
-
 
 
 @app.route('/login')
@@ -110,14 +109,10 @@ def posting():
     return render_template('post.html')
 
 
-@app.route('/animalList')
-def main():
-    return render_template('animalList.html')
-
 # 메인페이지에서 세부 동물정보 불러오기
 @app.route("/detail/<id>")
 def postGet(id):
-    clickAnimal = list(db.animals.find({'_id': id}))
+    clickAnimal = db.animals.find_one({'_id': ObjectId(id)}, {"_id": False})
     print(clickAnimal)
     return render_template("detail.html",clickAnimal=clickAnimal)
 
@@ -154,14 +149,16 @@ def deleteAnimal():
     db.animal.delete_one(deleteAnimal)
     return jsonify({'msg': '삭제 완료!'})
 
- # 글 수정시 
+
+# 글 수정시
 @app.route("/api/edit", methods=["GET"])
 def animal_edit():
     detail_id = request.args.get("id_give")
-    animal_details = db.animals.find_one({"_id": ObjectId(detail_id)}, {"_id": False}                                 
+    animal_details = db.animals.find_one({"_id": ObjectId(detail_id)}, {"_id": False})
     return jsonify({'animal_details': animal_details})
 
- # 글 수정 후 재등록시  
+
+# 글 수정 후 재등록시
 @app.route("/api/post", methods=["POST"])
 def animal_repost():
     detail_id = request.form["id_give"]
@@ -175,8 +172,8 @@ def animal_repost():
 
     animal_details = db.animals.find_one({"_id": ObjectId(detail_id)}, {"_id": False})
     print(animal_details)
-    return jsonify({'animal_details': animal_details})                                         
-                                         
-  
+    return jsonify({'animal_details': animal_details})
+
+
 if __name__ == '__main__':
     app.run('0.0.0.0', port=5010, debug=True)
