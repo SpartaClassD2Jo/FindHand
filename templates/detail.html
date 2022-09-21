@@ -19,12 +19,21 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    background-image: url("https://p4.wallpaperbetter.com/wallpaper/941/355/705/sky-blue-pastel-spring-wallpaper-preview.jpg");
+    {#background-image: url("https://p4.wallpaperbetter.com/wallpaper/941/355/705/sky-blue-pastel-spring-wallpaper-preview.jpg");#}
+    background-color: #f4f9f1;
 
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center;
 }
+
+.top_div {
+            background-color: #1f6acF;
+            width: inherit;
+            height: 10px;
+    position:absolute;
+    top:0
+        }
 
 /*메인페이지 버튼*/
 #mainPageBtn {
@@ -170,12 +179,12 @@
                     let sex = animal_details["sex"]
                     let info = animal_details["info"]
                     console.log(animal_details, kind)
-                    let html_temp =  `<div id="input-box">
+                    let html_temp = `<div id="input-box">
                                         <form>
-                                            품종 <input  required id="kind" type="text" value="${kind}"/>
-                                            지역 <input required id="area"  type="text" value="${area}"/>
-                                            성별 <input required id="sex" type="text" value="${sex}"/>
-                                            INFO <input required id="info" type="text" value="${info}"/>
+                                            품종 <input id="kind" type="text" value="${kind}"/>
+                                            지역 <input id="area"  type="text" value="${area}"/>
+                                            성별 <input id="sex" type="text" value="${sex}"/>
+                                            INFO <input id="info" type="text" value="${info}"/>
                                              <button onclick="rePosting()">등록</button>
                                         </form>
                                     </div>`
@@ -199,22 +208,22 @@
                 url: `/api/post`,
                 data: {kind_give: kind, area_give: area, sex_give: sex, info_give: info, "id_give": id},
                 success: function (response) {
-                    let animal_details = response[0]["animal_details"];
+                    let animal_details = response["animal_details"];
                     let kind = animal_details["kind"]
                     let area = animal_details["area"]
                     let sex = animal_details["sex"]
                     let info = animal_details["info"]
                     console.log(animal_details, kind)
-                    let html_temp =`<div id="input-box">
-                                        <ul>
-                                            <li>품종: ${kind}</li>
-                                            <li>지역: ${area}</li>
-                                            <li>성별: ${sex}</li>
-                                            <li>INFO: ${info}</li>
-                                        </ul>
+                    let html_temp = `<div id="input-box">
+                                        <form>
+                                            품종 <input type="text" value="${kind}"/>
+                                            지역 <input type="text" value="${area}"/>
+                                            성별 <input type="text" value="${sex}"/>
+                                            INFO <input type="text" value="${info}"/>
+                                             <button onclick="rePosting()">등록</button>
+                                        </form>
                                     </div>`
                     $("#input-box").append(html_temp)
-                     alert(response[1]['msg'])
 
 
 
@@ -227,6 +236,8 @@
 </head>
 <body>
     <div id="root">
+    <!-- 사진이 초록색이라 파란색이랑 매치안되서 파란색이랑 조화시키려고 우겨놓은 div(의미 x)    -->
+    <div class="top_div"></div>
         <div id="content-box">
             <div id="img-box">
 {#                <img src="http://www.usjournal.kr/news/data/20220416/p1065605892282128_336_thum.jpg" alt="">#}
