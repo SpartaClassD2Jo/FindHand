@@ -1,8 +1,3 @@
-@app.route('/')
-def main():
-    animals = list(db.animals.find({}, {"_id": False}))
-    return render_template("main.html", animals=animals)
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
