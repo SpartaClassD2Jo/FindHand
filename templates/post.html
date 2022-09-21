@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="{{ url_for('static', filename='post.css') }}">
+    <!--    <link rel="stylesheet" href="../static/post" type="text/css">-->
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+          crossorigin="anonymous">
+
+    <script>
+        function mainPage() {
+            window.location.href = '/animalList'
+        }
+
+
+        function posting() {
+            let kind = $('#kind').val()
+            let area = $('#area').val()
+            let sex = $('#sex').val()
+            let info = $('#info').val()
+            let url = $('#url').val()
+
+            $.ajax({
+                type: 'POST',
+                url: '/post',
+                data: {kind_give: kind,area_give: area, sex_give: sex, info_give: info, url_give: url},
+                success: function (response) {
+                    console.log(response)
+                    window.location.href = '/animalList'
+                }
+            })
+        }
+
+
+    </script>
+</head>
+<body>
+<div id="root">
+    <div id="content-box">
+        <div id="input-box">
+            <ul>
+                <li><input id="kind" type="text" placeholder="품종"></li>
+                <li><input id="area" type="text" placeholder="지역"></li>
+                <li><input id="sex" type="text" placeholder="성별"></li>
+                <li><input type="text" id="url" placeholder="url"></li>
+                <li><input id="info" type="text" placeholder="특징"></li>
+            </ul>
+            <div id="button-box">
+                <button onclick="mainPage()">취소</button>
+                <button onclick="posting()">등록</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>
+

@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="{{ url_for('static', filename='detail.css') }}">
+    <script>
+        function mainPage() {
+            window.location.href = '/animalList'
+        }
+
+        function deletePost() {
+            let kind = $('#kind').val()
+            let area = $('#area').val()
+            let sex = $('#sex').val()
+            let info = $('#info').val()
+
+             $.ajax({
+                type: 'POST',
+                url: '/delete',
+                data: {kind_give: kind, area_give: area, sex_give: sex, info_give: info},
+                success: function (response) {
+                    alert(response['msg'])
+                    window.location.reload()
+                }
+            });
+        }
+
+    </script>
+</head>
+<body>
+    <div id="root">
+        <div id="content-box">
+            <div id="img-box">
+                <img src="http://www.usjournal.kr/news/data/20220416/p1065605892282128_336_thum.jpg" alt="">
+            </div>
+            <div id="input-box">
+                <ul>
+                    <li>{{ clickAnimal }}</li>
+                    <li>{{ clickAnimal }}</li>
+                    <li>{{ clickAnimal }}</li>
+                    <li>{{ clickAnimal }}</li>
+                </ul>
+                <div id="button-box">
+                    <button>수정</button>
+                    <button onclick="deletePost()">삭제</button>
+                </div>
+            </div>
+        </div>
+        <button onclick="mainPage()" id="mainPageBtn">
+            메인페이지
+        </button>
+    </div>
+</body>
+</html>
