@@ -95,7 +95,7 @@
         }
 
         .shelter, .temp {
-            width: auto;
+            width: 70%;
             height: 50%;
             padding: 10px;
             overflow: scroll;
@@ -104,7 +104,7 @@
         }
 
         .divider-txt {
-            width: 60%;
+            width: 70%;
             height: 30px;
 
             text-align: center;
@@ -118,6 +118,9 @@
         .container {
             display: flex;
             height: 500px;
+
+            margin-left: 20px;
+
         }
 
         .username {
@@ -133,12 +136,26 @@
         .divider-txt-box {
             width: inherit;
             height: 30px;
-            background-color: #eef0ef;
+            background-color: white;
 
             display: flex;
             justify-content: center;
             align-items: center;
 
+            border: solid 1px #eef0eb;
+
+        }
+        .shelter_wrap{
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .temp_wrap{
+             width: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
         }
 
     </style>
@@ -172,6 +189,7 @@
 <div class="divider-txt-box">
     <div class="divider-txt">보호소</div>
 </div>
+<div class="shelter_wrap">
 <div class="shelter">
     <div class="container">
         <div class="row row-cols-auto">
@@ -190,21 +208,23 @@
         </div>
     </div>
 </div>
+</div>
 <br>
 <div class="divider-txt-box">
     <div class="divider-txt">임시보호</div>
 </div>
+<div class="temp_wrap">
 <div class="temp">
     <div class="container">
         <div class="row row-cols-auto">
             {% for animal in animals %}
-            {% if animal.inputValue %}
+            {% if animal.inputValue == False %}
             <a href="/detail/{{ animal._id }}">
                 <div class="col">
                     <div class="card" style="width: 15rem;">
                         <img src={{ animal.img }} class="card-img-top">
                         <div class="card-body">
-                            <p class="card-text">{{ animal.area }}</p>
+                            <p class="card-text">{{ animal.notice_num }}</p>
                         </div>
                     </div>
                 </div>
@@ -214,5 +234,7 @@
         </div>
     </div>
 </div>
+</div>
 </body>
 </html>
+
