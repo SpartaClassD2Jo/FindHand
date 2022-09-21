@@ -1,6 +1,5 @@
 from pymongo import MongoClient
 from bs4 import BeautifulSoup
-from db import client
 import certifi
 from jinja2 import Template
 import requests
@@ -13,12 +12,10 @@ from datetime import datetime, timedelta
 
 
 app = Flask(__name__)
-
 SECRET_KEY = 'SPARTA'
-
-
-
 ca = certifi.where()
+client = MongoClient('mongodb+srv://test:sparta@cluster0.onepf4f.mongodb.net/?retryWrites=true&w=majority', 27017,
+                     tlsCAFile=ca)
 db = client.dbsparta_plus_week4
 
 @app.route('/animalList')
@@ -67,13 +64,16 @@ def check_duplicate():
 def register_newuser():
     email_receive = request.form['email_give']
     password_receive = request.form['password_give']
+    nickname_receive = request.form['nickname_give']
     pw_hash = hashlib.sha256(password_receive.encode('utf-8')).hexdigest()
     doc = {
-        "email" : email_receive,
-        "password" : pw_hash
+        "username" : email_receive,
+        "password" : pw_hash,
+        "nickname" : nickname_receive
     }
     db.users.insert_one(doc)
     return jsonify({'msg':'회원 가입 완료!'})
+
 
 
 @app.route('/sign_in', methods=['POST'])
