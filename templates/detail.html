@@ -19,7 +19,8 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    background-image: url("https://cdn.pixabay.com/photo/2016/04/12/22/35/watercolour-1325656__480.jpg");
+    background-image: url("https://p4.wallpaperbetter.com/wallpaper/941/355/705/sky-blue-pastel-spring-wallpaper-preview.jpg");
+
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center;
@@ -28,25 +29,25 @@
 /*메인페이지 버튼*/
 #mainPageBtn {
     position:relative;
-    bottom:430px;
-    right: 105px;
+    bottom:530px;
+    right:100px;
 
     width: 100px;
     height: 30px;
     border-radius: 5px;
     border:none;
-    background-color:white;
+    background-color:#1f6acF;color:white ;
 
 }
 
 /*컨텐츠 박스*/
 #content-box {
-    width: 1000px;
-    height: 800px;
+    width: 600px;
+    height: 1000px;
     background-color: rgba(0,0,0,0.3);
 
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     border-radius: 10px;
     padding: 0 20px 0 20px;
 
@@ -54,12 +55,13 @@
 
 /*이미지 박스*/
 #img-box {
-    width:50%;
-    height:100%;
-    /*background-color: salmon;*/
+    width:100%;
+    height:50%;
+    {#background-color: salmon;#}
     display: flex;
     align-items: center;
     justify-content: center;
+    padding-top:10px;
 }
 
 /*이미지 박스안의 이미지*/
@@ -72,9 +74,9 @@
 
 /*인풋 박스*/
 #input-box {
-    width:50%;
-    height:100%;
-    /*background-color: skyblue;*/
+    width:100%;
+    height:50%;
+    {#background-color: skyblue;#}
 
     display: flex;
     flex-direction: column;
@@ -84,30 +86,37 @@
 
 /*인풋 박스안의 ul*/
 #input-box ul {
-    /*background-color: antiquewhite;*/
+    {#background-color: antiquewhite;#}
+    width: 90%;
 }
 
 /*인풋 박스안의 인풋*/
-#input-box input {
-    width: 400px;
-    height:100px;
+#input-box li {
+    width: 95%;
+    height:70px;
     border-radius: 10px;
     border:none;
     margin: 10px 0 10px 0;
+    background-color: white;
+    display: flex;
+    align-items: center;
+    padding-left:5%;
+    margin-bottom:15px;
 }
 
 /*인풋 박스안의 특징 인풋*/
-#input-box ul li:nth-child(4) input {
-    height: 300px;
+#input-box > ul > li:nth-child(4) {
+    height: 110px;
 }
 
 /*버튼 박스*/
 #button-box {
-    /*background-color: red;*/
-    width:400px;
+    {#background-color: red;#}
+    width:90%;
     display: flex;
     justify-content: flex-end;
     margin-top:10px;
+    margin-top:20px;
 }
 
 /*버튼 박스안의 버튼*/
@@ -116,7 +125,7 @@
     height: 30px;
     border-radius: 5px;
     border:none;
-    background-color:white;
+    background-color:#1f6acF;color:white ;
 }
 
 /*취소 버튼*/
