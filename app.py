@@ -119,7 +119,7 @@ def main():
 def postGet(id):
     clickAnimal = list(db.animals.find({'_id': id}))
     print(clickAnimal)
-    # return render_template("detail.html",clickAnimal=clickAnimal)
+    return render_template("detail.html",clickAnimal=clickAnimal)
 
 
 # 글쓰는 페이지에서 등록하기 버튼 누르기
