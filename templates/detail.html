@@ -177,6 +177,42 @@
                 }
             });
         }
+        function rePosting() {
+            let url = window.location.href.split("/")
+            let id = url[url.length - 1]
+            let kind = $('#kind').val()
+            let area = $('#area').val()
+            let sex = $('#sex').val()
+            let info = $('#info').val()
+
+            $("#input-box").empty()
+            $.ajax({
+                type: 'POST',
+                url: `/api/post`,
+                data: {kind_give: kind, area_give: area, sex_give: sex, info_give: info, "id_give": id},
+                success: function (response) {
+                    let animal_details = response["animal_details"];
+                    let kind = animal_details["kind"]
+                    let area = animal_details["area"]
+                    let sex = animal_details["sex"]
+                    let info = animal_details["info"]
+                    console.log(animal_details, kind)
+                    let html_temp = `<div id="input-box">
+                                        <form>
+                                            품종 <input type="text" value="${kind}"/>
+                                            지역 <input type="text" value="${area}"/>
+                                            성별 <input type="text" value="${sex}"/>
+                                            INFO <input type="text" value="${info}"/>
+                                             <button onclick="rePosting()">등록</button>
+                                        </form>
+                                    </div>`
+                    $("#input-box").append(html_temp)
+
+
+
+                }
+            });
+        }
         
 
     </script>
