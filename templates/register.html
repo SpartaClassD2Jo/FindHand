@@ -96,13 +96,16 @@
 
     </style>
     <script>
+        
+//         회원 가입 양식에서 각각의 value 들을 모아 줍니다
         function newUser() {
             let email = $('#email').val()
             let password = $('#password').val()
             let passwordCheck = $('#passwordCheck').val()
             let nickname = $('#nickname').val()
             console.log($("#dup").hasClass('checked'))
-
+            
+//          각 양식이 올바른지 확인하는 조건문입니다. 중복 체크는 했는지, 비밀번호가 일치하는지, 아이디는 스페이스바만 누른건 아닌지 등을 체크합니다.
             if (password === passwordCheck && $("#help-id").hasClass('is-success') && password !== "" && email.trim().length >= 2
                 && nickname.length !== 0) {
                 $.ajax({
@@ -113,6 +116,7 @@
                         password_give: password,
                         nickname_give: nickname
                     },
+                    // 이 모든 조건문을 통과 했다면 회원가입이 완료 되고 로그인 페이지로 넘어 갑니다. 
                     success: function (response) {
                         if (response['result'] == 'success') {
                             alert('회원가입이 완료되었습니다.')
@@ -123,6 +127,8 @@
                         }
                     }
                 })
+                
+                // 회원가입이 불가피할수있는 경우들을 나열 하여 그에 맞는 경고문을 띄워 줍니다.
             } else if (password !== passwordCheck && $("#dup").hasClass('checked')) {
                 alert('비밀 번호를 확인해주세요')
                 passwordCheck.focus()
@@ -136,6 +142,8 @@
             }
 
         }
+        
+        // 사용 가능한 문자열들을 보여주는 function 들 입니다.
 
         function is_nickname(asValue) {
             var regExp = /^(?=.*[a-zA-Z])[-a-zA-Z0-9_.]{2,10}$/;
@@ -147,10 +155,14 @@
             return regExp.test(asValue);
         }
 
+        //아이디 중복 확인 함수.
+        
         function check_dup() {
 
             let username = $('#email').val()
-            console.log(username)
+            
+            // 아이디가 없을 경우, 아이디의 형식이 맞지 않을 경우 의 조건문.
+            
             if (username == "") {
                 $("#help-id").text("아이디를 입력해주세요.").removeClass("is-safe").addClass("is-danger")
                 $("#input-username").focus()
@@ -169,7 +181,8 @@
                     username_give: username
                 },
                 success: function (response) {
-
+                    
+                //만약 데이터 베이스에 같은 아이디가 존재 한다면, 경고를 줍니다. 통과했다면 부가적인 class를 부여 하여 회원가입을 해도 되는 조건을 완성 시켜 줍니다.
                     if (response["exists"]) {
                         $("#help-id").text("이미 존재하는 아이디입니다.").removeClass("is-safe").addClass("is-danger")
                         $("#input-username").focus()
