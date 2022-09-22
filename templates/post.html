@@ -150,11 +150,12 @@ input {
 }
     </style>
     <script>
+        //메인페이지 이동
         function mainPage() {
             window.location.href = '/'
         }
 
-
+        //글 포스팅
         function posting() {
             let kind = $('#kind').val()
             let area = $('#area').val()
@@ -167,7 +168,9 @@ input {
                 url: '/post',
                 data: {kind_give: kind,area_give: area, sex_give: sex, info_give: info, url_give: url},
                 success: function (response) {
+                    //등록 완료 alert 띄우기
                     alert(response['meassage'])
+                    //메인페이지 이동
                     window.location.href = '/'
                 }
             })
