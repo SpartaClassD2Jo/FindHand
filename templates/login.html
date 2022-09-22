@@ -3,11 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
     <!-- Bulma CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.1/css/bulma.min.css">
+
     <!-- Font Awesome CSS -->
     <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
-
+    <!-- google font -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=PT+Serif:wght@700&display=swap" rel="stylesheet">
@@ -15,6 +17,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Gowun+Batang&display=swap" rel="stylesheet">
+
     <!-- JS -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.js"></script>
@@ -112,11 +115,16 @@
 
     <script>
 
-
+<!-- 로그인 버튼 클릭 시 동작 시작-->
         function sign_in() {
+  //  입력된 id,password 저장
             let username = $("#input-username").val()
+
             let password = $("#input-password").val()
 
+  //id값이 비어있을 경우와 비어있지 않을 경우 확인
+  //비어있는 조건 -> id 아래 help-id-login에 text값 변경 & focus이벤트
+  //비어있지 않은 조건 -> help-id-login에 text값 = ""
             if (username == "") {
                 $("#help-id-login").text("아이디를 입력해주세요.")
                 $("#input-username").focus()
@@ -124,6 +132,10 @@
             } else {
                 $("#help-id-login").text("")
             }
+  //비밀번호 값이 비어있을 경우와 비어있지 않을 경우 확인
+  //비어있는 조건 -> 비번 아래 help-password-login에 text값 변경 & focus이벤트
+  //비어있지 않은 조건 -> help-password-login에 text값 = ""
+
 
             if (password == "") {
                 $("#help-password-login").text("비밀번호를 입력해주세요.")
@@ -132,6 +144,8 @@
             } else {
                 $("#help-password-login").text("")
             }
+   //클라이언트 POST 시작
+   // 서버쪽으로 입력된 id, password 태워서 보내준다.
             $.ajax({
                 type: "POST",
                 url: "/sign_in",
@@ -139,6 +153,9 @@
                     username_give: username,
                     password_give: password
                 },
+ // 성공할 경우:
+//response 값이 success가 넘어오는 경우 서버로 부터 토큰을 받아서 쿠키로 저장해줌. 이후 메인페이지로 이동
+//response 값이 fail이 넘어오는 경우 msg 보여줌
                 success: function (response) {
                     if (response['result'] == 'success') {
                         $.cookie('mytoken', response['token'], {path: '/'});
