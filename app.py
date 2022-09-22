@@ -61,17 +61,18 @@ def register_page():
 
 @app.route('/register/duplicate', methods=['POST'])
 def check_duplicate():
-    email = request.form['username_give']
-    print(email)
-    existing_user = bool(list(db.users.find({'user': email})))
-    print(existing_user)
+    email = request.form['username_give'] 
+    
+#     받아 온 아이디를 사용해서 데이터 베이스에 같은 유저가 있는지 체크 합니다. 있으면 사용중이라는 메세지, 아니라면 사용 가능 메시지를 보내줍니다.
+
+    existing_user = bool(list(db.users.find({'username': email})))
     if existing_user:
         return jsonify({'msg': '이미 사용중인 아이디입니다'})
     else:
         return jsonify({'msg': '사용 가능한 아이디입니다'})
 
 
-# 회원 가입 API
+# 회원 가입 API. form 에서 필요한 정보들을 받아온후, 비밀번호는 hash 를 해주고 나머지와 같이 데이터 베이스에 넣어 줍니다. 
 @app.route('/register/newUser', methods=['POST'])
 def register_newuser():
     email_receive = request.form['email_give']
