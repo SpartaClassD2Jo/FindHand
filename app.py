@@ -24,7 +24,8 @@ def home():
     token_receive = request.cookies.get('mytoken')
     try:
         payload = jwt.decode(token_receive, SECRET_KEY, algorithms=['HS256'])
-
+        
+        # main.html에 전송될 동물 list 
         animals = list(db.animals.find({}))
         user = db.users.find_one({'username': payload['id']})
         return render_template("main.html", animals=animals, nickname=user['nickname'])
@@ -112,29 +113,33 @@ def posting():
 # 메인페이지에서 세부 동물정보 불러오기
 @app.route("/detail/<id>")
 def postGet(id):
+    # 메인페이지에서 해당 동물 클릭시 url의 id를 받아서 찾은 후, id에 해당하는 동물 정보를 clickanimal로 전송
     clickAnimal = db.animals.find_one({'_id': ObjectId(id)}, {"_id": False})
-    print(clickAnimal)
     return render_template("detail.html",clickAnimal=clickAnimal)
 
 
 # 글쓰는 페이지에서 등록하기 버튼 누르기
 @app.route("/post", methods=["POST"])
 def animal_post():
+    # 받은 데이터들을 변수로 저장
     kind_receive = request.form['kind_give']
     area_receive = request.form['area_give']
     sex_receive = request.form['sex_give']
     info_receive = request.form['info_give']
     url_receive = request.form["url_give"]
-
+    
+    # DB의 저장하기 위한 형태로 key값을 붙여줌
     doc = {
         'kind': kind_receive,
         'area': area_receive,
         'sex': sex_receive,
         'info': info_receive,
         'img': url_receive,
+        # inputValue를 통해 유기동물보호소와 임시보호 동물을 구분, 임시보호동물의 경우 'inputValue': True
         'inputValue': True
     }
-
+    
+    # doc를 DB에 insert
     db.animals.insert_one(doc)
     return jsonify({'meassage': '등록 완료!'})
 
@@ -142,8 +147,10 @@ def animal_post():
 # 작성한 글 삭제하기
 @app.route("/delete", methods=["GET"])
 def delete_animal():
+    # detail.html에서 삭제버튼 누를 시, 해당페이지 url에 포함된 id를 전송 받아 detail_id에 넣어준다.
     detail_id = request.args.get("id_give")
-    print(detail_id)
+    
+    # 받은 id를 이용하여 DB에서 해당 동물의 data를 삭제
     db.animals.delete_one({"_id": ObjectId(detail_id)})
     return jsonify({'msg': '삭제 완료!'})
 
@@ -151,7 +158,10 @@ def delete_animal():
 # 글 수정시
 @app.route("/api/edit", methods=["GET"])
 def animal_edit():
+    # detail.html에서 수정버튼 누를 시, 해당페이지 url에 포함된 id를 전송 받아 detail_id에 넣어준다.
     detail_id = request.args.get("id_give")
+    
+    # 받은 id를 이용하여 DB에서 해당 동물의 data를 찾아서 animal_details로 return
     animal_details = db.animals.find_one({"_id": ObjectId(detail_id)}, {"_id": False})
     return jsonify({'animal_details': animal_details})
 
@@ -159,17 +169,19 @@ def animal_edit():
 # 글 수정 후 재등록시
 @app.route("/api/post", methods=["POST"])
 def animal_repost():
+    # 수정 후 등록 버튼을 누를시, 클라이언트에서 전송된 데이터를 받아 각 변수에 넣어준다.
     detail_id = request.form["id_give"]
     kind_receive = request.form['kind_give']
     area_receive = request.form['area_give']
     sex_receive = request.form['sex_give']
     info_receive = request.form['info_give']
-
+    
+    # 받은 detail_id를 이용하여 DB의 동물 정보를 업데이트 해준다.
     db.animals.update_many({"_id": ObjectId(detail_id)}, {
         "$set": {'kind': kind_receive, 'area': area_receive, 'sex': sex_receive, 'info': info_receive}})
-
+    
+    # 업데이트 후 다시 id로 해당 동물의 정보와 메시지를 return
     animal_details = db.animals.find_one({"_id": ObjectId(detail_id)}, {"_id": False})
-    print(animal_details)
     return jsonify({'animal_details': animal_details}, {'msg': '수정 완료!'})
 
 
