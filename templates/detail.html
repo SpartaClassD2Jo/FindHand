@@ -228,7 +228,6 @@
                                     </div>`
                     $("#input-box").append(html_temp)
 
-                    {#window.location.reload()#}
                 }
             });
         }
@@ -248,6 +247,7 @@
                 url: `/api/post`,
                 data: {kind_give: kind, area_give: area, sex_give: sex, info_give: info, "id_give": id},
                 success: function (response) {
+           
                     let animal_details = response[0]["animal_details"];
                     let kind = animal_details["kind"]
                     let area = animal_details["area"]
@@ -288,6 +288,7 @@
             </div>
             <div id="input-box">
                 <ul>
+                    <!-- server에서 받아온 clickAniaml데이터에서 notice_num을 찾는데, notice_num이 있다면 그대로 적용하고, 아니라면 info 데이터를 넣는다.  -->
                    {% if clickAnimal['notice_num'] %}
                     <li>{{ clickAnimal['notice_num'] }}</li>
                 {% else %}
