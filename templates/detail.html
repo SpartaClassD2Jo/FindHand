@@ -147,7 +147,7 @@
         border:none;
         background-color:#1f6acF;color:white ;
     }
-    
+
 /*버튼 박스*/
     #button-box {
         {#background-color: red;#}
@@ -174,12 +174,14 @@
 
 </style>
     <script>
+        //메인페이지 이동
         function mainPage() {
             window.location.href = '/'
         }
 
-
+        //글 삭제
         function deletePost() {
+            //url에서 id추출
             let url = window.location.href.split("/")
             let id = url[url.length - 1]
             console.log(id)
@@ -189,14 +191,18 @@
                 data: {"id_give": id},
                 success: function (response) {
                     alert(response['msg'])
+                    //메인페이지 이동
                     window.location.href = '/'
                 }
             });
         }
 
+        //글 수정
         function editPost() {
+             //url에서 id추출
             let url = window.location.href.split("/")
             let id = url[url.length - 1]
+            //input-box 안에 있는 태그 전부 지우기
             $("#input-box").empty()
             $.ajax({
                 type: 'GET',
@@ -209,12 +215,14 @@
                     let sex = animal_details["sex"]
                     let info = animal_details["info"]
                     console.log(animal_details, kind)
+                    //기존 li태그를 input으로 바꾸고 등록 버튼 생김
                     let html_temp = `<div id="input-box">
                                         <form>
                                             품종 <input id="kind" type="text" value="${kind}"/>
                                             지역 <input id="area"  type="text" value="${area}"/>
                                             성별 <input id="sex" type="text" value="${sex}"/>
                                             INFO <input id="info" type="text" value="${info}"/>
+                                            
                                              <button onclick="rePosting()">등록</button>
                                         </form>
                                     </div>`
@@ -224,6 +232,8 @@
                 }
             });
         }
+
+        //글 수정 후 재등록
         function rePosting() {
             let url = window.location.href.split("/")
             let id = url[url.length - 1]
@@ -254,7 +264,9 @@
                                         </form>
                                     </div>`
                     $("#input-box").append(html_temp)
+                    //수정완료 alert 띄우기
                     alert(response[1]['msg'])
+                    // 메인페이지 이동
                     window.location.href = '/'
 
 
