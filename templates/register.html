@@ -183,7 +183,7 @@
                 success: function (response) {
                     
                 //만약 데이터 베이스에 같은 아이디가 존재 한다면, 경고를 줍니다. 통과했다면 부가적인 class를 부여 하여 회원가입을 해도 되는 조건을 완성 시켜 줍니다.
-                    if (response["exists"]) {
+                    if (response["msg"]==="이미 사용중인 아이디입니다") {
                         $("#help-id").text("이미 존재하는 아이디입니다.").removeClass("is-safe").addClass("is-danger")
                         $("#input-username").focus()
                     } else {
