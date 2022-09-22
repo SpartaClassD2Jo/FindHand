@@ -238,13 +238,18 @@
 <div class="shelter">
     <div class="container">
         <div class="row row-cols-auto">
+            <!-- server에서 받은 animals(동물list)를 for을 이용해 해당 부분에 한마리씩 적용 -->
             {% for animal in animals %}
+            <!--animal.inputValue가 false, 즉 유기동물보호소에서 크롤링한 데이터만 if문으로 걸러냄 -->
             {% if animal.inputValue == false %}
+            <!-- detail.html에서 DB를 통해 해당 동물의 정보를 받아오기 위해서는 _id가 필요, 현재페이지에서 동물list를 구성시 url에 id를 적용해줌으로써 detail.html에서 사용가능  -->
             <a href="/detail/{{ animal._id }}">
                 <div class="col">
                     <div class="card" style="width: 15rem;">
+                        <!-- animal에서 img정보를 적용 -->
                         <img src={{ animal.img }} class="card-img-top">
                         <div class="card-body">
+                            <!-- animal에서 공고번호를 적용 -->
                             <p class="card-text">{{ animal.notice_num }}</p>
                         </div>
                     </div>
@@ -264,13 +269,18 @@
 <div class="temp">
     <div class="container">
         <div class="row row-cols-auto">
+            <!-- server에서 받은 animals(동물list)를 for을 이용해 해당 부분에 한마리씩 적용 -->
             {% for animal in animals %}
+             <!--animal.inputValue가 true, 즉 직접 업로드한 데이터(임시보호동물)만 if문으로 걸러냄 -->
             {% if animal.inputValue == true %}
+             <!-- detail.html에서 DB를 통해 해당 동물의 정보를 받아오기 위해서는 _id가 필요, 현재페이지에서 동물list를 구성시 url에 id를 적용해줌으로써 detail.html에서 사용가능  -->
             <a href="/detail/{{ animal._id }}">
                 <div class="col">
                     <div class="card" style="width: 15rem;">
+                        <!-- animal에서 img 정보를 적용 -->
                         <img src={{ animal.img }} class="card-img-top">
                         <div class="card-body">
+                            <!-- animal에서 area 정보를 적용 -->
                             <p class="card-text">{{ animal.area }}</p>
                         </div>
                     </div>
