@@ -7,174 +7,170 @@
 
 <style>
     * {
-    margin: 0;
-    padding: 0;
-    list-style: none;
-}
+        margin: 0;
+        padding: 0;
+        list-style: none;
+    }
 
 /*루트*/
-#root {
-    width: 100%;
-    height: 100vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    {#background-image: url("https://p4.wallpaperbetter.com/wallpaper/941/355/705/sky-blue-pastel-spring-wallpaper-preview.jpg");#}
-    background-color: #f4f9f1;
+    #root {
+        width: 100%;
+        height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        {#background-image: url("https://p4.wallpaperbetter.com/wallpaper/941/355/705/sky-blue-pastel-spring-wallpaper-preview.jpg");#}
+        background-color: #f4f9f1;
 
-    background-repeat: no-repeat;
-    background-size: cover;
-    background-position: center;
-}
+        background-repeat: no-repeat;
+        background-size: cover;
+        background-position: center;
+    }
 
-.top_div {
-            background-color: #1f6acF;
-            width: inherit;
-            height: 10px;
-            position:absolute;
-            top:0
-        }
+    .top_div {
+        background-color: #1f6acF;
+        width: inherit;
+        height: 10px;
+        position:absolute;
+        top:0
+            }
 
 /*메인페이지 버튼*/
-#mainPageBtn {
+    #mainPageBtn {
+        position: absolute;
+        top : 12%;
+        left: 55%;
+        width: 100px;
+        height: 30px;
+        border-radius: 5px;
+        border:none;
+        background-color:#1f6acF;color:white ;
 
-    position: absolute;
-    top : 12%;
-    left: 55%;
-    width: 100px;
-    height: 30px;
-    border-radius: 5px;
-    border:none;
-    background-color:#1f6acF;color:white ;
-
-}
+    }
 
 /*컨텐츠 박스*/
-#content-box {
-    width: 350px;
-    height: 600px;
-    background-color: rgba(0,0,0,0.3);
+    #content-box {
+        width: 350px;
+        height: 600px;
+        background-color: rgba(0,0,0,0.3);
+        margin-top: 80px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        border-radius: 10px;
+        padding: 0 20px 0 20px;
 
-    margin-top: 80px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    border-radius: 10px;
-    padding: 0 20px 0 20px;
-
-}
+    }
 
 /*이미지 박스*/
-#img-box {
-    width:70%;
-    height:40%;
-    {#background-color: salmon;#}
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding-top:10px;
-}
+    #img-box {
+        width:70%;
+        height:40%;
+        {#background-color: salmon;#}
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding-top:10px;
+    }
 
 /*이미지 박스안의 이미지*/
-#img-box > img {
-    width:90%;
-    height:90%;
-    border-radius: 10px;
-
-}
+    #img-box > img {
+        width:90%;
+        height:90%;
+        border-radius: 10px;
+        }
 
 /*인풋 박스*/
-#input-box {
-    width:100%;
-    height:50%;
-    /*background-color: skyblue;*/
-
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    font-size: small;
-}
+    #input-box {
+        width:100%;
+        height:50%;
+        /*background-color: skyblue;*/
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        font-size: small;
+    }
 
 /*인풋 박스안의 ul*/
-#input-box ul {
-    {#background-color: antiquewhite;#}
-    width: 90%;
-}
+    #input-box ul {
+        {#background-color: antiquewhite;#}
+        width: 90%;
+    }
 
 /*인풋 박스안의 인풋*/
-#input-box li {
-    width: 95%;
-    height:40px;
-    border-radius: 10px;
-    border:none;
-    margin: 10px 0 10px 0;
-    background-color: white;
-    display: flex;
-    align-items: center;
-    padding-left:5%;
-    margin-bottom:15px;
-}
+    #input-box li {
+        width: 95%;
+        height:40px;
+        border-radius: 10px;
+        border:none;
+        margin: 10px 0 10px 0;
+        background-color: white;
+        display: flex;
+        align-items: center;
+        padding-left:5%;
+        margin-bottom:15px;
+    }
 
 /*인풋 박스안의 특징 인풋*/
-#input-box > ul > li:nth-child(4) {
-    height: 60px;
-}
+    #input-box > ul > li:nth-child(4) {
+        height: 60px;
+    }
 
     form {
-    width:100%;
-    display:flex;
-    justify-content: flex-end;
-    flex-direction:column;
-    color:white;
-}
+        width:100%;
+        display:flex;
+        justify-content: flex-end;
+        flex-direction:column;
+        color:white;
+    }
 
-form > input {
-    width: 80%;
-    height:60px;
-    border-radius: 10px;
-    border:none;
-    margin: 10px 0 10px 0;
-    background-color: white;
-    display: flex;
-    align-items: center;
-    color:black;
-    padding-left:7px;
-    margin:0 auto 0 auto;
-}
+    form > input {
+        width: 80%;
+        height:60px;
+        border-radius: 10px;
+        border:none;
+        margin: 10px 0 10px 0;
+        background-color: white;
+        display: flex;
+        align-items: center;
+        color:black;
+        padding-left:7px;
+        margin:0 auto 0 auto;
+    }
 
-form > button {
-    width: 100px;
-    height: 30px;
-    border-radius: 5px;
-    border:none;
-    background-color:#1f6acF;color:white ;
-}
+    form > button {
+        width: 100px;
+        height: 30px;
+        border-radius: 5px;
+        border:none;
+        background-color:#1f6acF;color:white ;
+    }
     
 /*버튼 박스*/
-#button-box {
-    {#background-color: red;#}
-    width:90%;
-    display: flex;
-    justify-content: flex-end;
-    margin-top:10px;
-    margin-top:20px;
-}
+    #button-box {
+        {#background-color: red;#}
+        width:90%;
+        display: flex;
+        justify-content: flex-end;
+        margin-top:10px;
+        margin-top:20px;
+    }
 
 /*버튼 박스안의 버튼*/
-#button-box button {
-    width: 100px;
-    height: 30px;
-    border-radius: 5px;
-    border:none;
-    background-color:#1f6acF;color:white ;
-}
+    #button-box button {
+        width: 100px;
+        height: 30px;
+        border-radius: 5px;
+        border:none;
+        background-color:#1f6acF;color:white ;
+    }
 
 /*취소 버튼*/
-#button-box button:nth-child(1) {
-    margin-right: 10px;
-}
+    #button-box button:nth-child(1) {
+        margin-right: 10px;
+    }
 
 </style>
     <script>
